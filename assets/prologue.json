@@ -1,0 +1,74 @@
+{
+    "init": "Init",
+    "scenes": [
+        {
+            "name": "Init",
+            "text": "",
+            "choices": [{
+                "text": "START",
+                "actions": "goto Prologue.whoNarrator"
+            }]
+        },
+        {
+            "name": "Prologue.narratorStart",
+            "text": "Hello? <pause><pause>Hello.",
+            "choices": [{
+                "text": "...",
+                "actions": "continue"
+            }]
+        },
+        {
+            "text": "One, two, three. <pause>Mic check!",
+            "choices": [{
+                "text": "...",
+                "actions": "continue"
+            }]
+        },
+        {
+            "text": "Are you reading this?",
+            "choices": [{
+                "text": "...?",
+                "actions": "continue"
+            }]
+        },
+        {
+            "text": "Yes, yes, I’m talking about <bold>you</bold>, player.",
+            "choices": [{
+                "text": "Who are you?",
+                "actions": "continue"
+            }]
+        },
+        {
+            "name": "Prologue.whoNarrator",
+            "text": "Who am I? <pause><pause>Is that important?",
+            "choices": [{
+                "text": "Yes, it is.",
+                "actions": "goto Prologue.narratorImportant"
+            }, {
+                "text": "No, it's not.",
+                "actions": "goto Prologue.narratorNotImportant"
+            }]
+        },
+        {
+            "name": "Prologue.narratorImportant",
+            "text": "Oh! <pause>A curious one, I see. <pause>But who I am isn’t important.",
+            "choices": [{
+                "text": "...",
+                "actions": "goto Prologue.whoYou"
+            }]
+        },
+        {
+            "name": "Prologue.narratorNotImportant",
+            "text": "Merveilleux! <pause>Keep that up. <pause>Anyways...",
+            "choices": [{
+                "text": "...",
+                "actions": "goto Prologue.whoYou"
+            }]
+        },
+        {
+            "name": "Prologue.whoYou",
+            "text": "The more pressing question is...<pause><pause><pause>who are <italics>you</italics>?",
+            "choices": []
+        }
+    ]
+}
