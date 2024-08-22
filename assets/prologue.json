@@ -14,7 +14,7 @@
         },
         {
             "name": "Prologue.credits",
-            "text": "Ah well hello! It seems you're interested in learning more about our \"company\". <pause> <newline> <newline> Well, we're a small little company composed of our overworked staff the NARRATOR, Narrator, and narrator. <pause> Of course that is the story department. Behind the scenes there a bunch of artists helping draw all of the backgrounds and such. Well, <italics>(you hear someone chuckling)</italics> we're just the company staff, the main project is run by the executives. There's the one who coded all of this @uqers, the main artist and secondary writer, @endermb_, and this project's planner and writer, @em_fire. <pause> <newline> <italics> Do I even exist? </italics>",
+            "text": "Ah well hello!<pause><pause> It seems you're interested in learning more about our \"company\". <pause><pause> <newline> <newline> Well, we're a small little company composed of our overworked staff the NARRATOR, Narrator, and narrator. <pause><pause> Of course that is the story department. The visual department has a bunch of artists helping draw all of the backgrounds and profile pictures. <pause> <pause> <newline>Well, <italics>(you hear someone chuckling)</italics> we're just the company staff, the main project is run by the executives. There's the one who coded all of this, <pause> @uqers, the main artist and secondary writer, <pause> @endermb_, and this project's planner and writer, <pause> @em_fire. <pause> <newline> <italics> Do I even exist? </italics>",
             "choices": [{
                 "text": "RETURN",
                 "actions": "goto Title"
