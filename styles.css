@@ -35,7 +35,7 @@
     padding: 6px;
     margin: 6px;
 
-    font-size: 20px;
+    font-size: 22px;
 }
 #choice1 {
     grid-area: 37 / 1 / 45 / 12;
@@ -78,8 +78,54 @@
     align-items: center;
     justify-content: center;
 }
+
 .choice {
     border: 1px solid gray;
     padding: 6px;
     cursor: pointer;
+}
+.choice:hover {
+    background-color: #CCC;
+}
+
+#mainContent {
+    z-index: 10;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+#popup {
+    z-index: 20;
+    display: none;
+    border: 1px solid gray;
+    background-color: white;
+
+    width: 19vw;
+    height: 8vh;
+
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+
+    margin: auto;
+}
+#popupText {
+    margin: 7px;
+    text-align: center;
+    font-size: 20px;
+}
+#popupInput {
+    resize: none;
+    width: calc(19vw - 81px);
+}
+#popupSubmission {
+    position: absolute;
+    bottom: 0.3vw;
+    margin: 5px;
+    margin-bottom: 2px;
 }
