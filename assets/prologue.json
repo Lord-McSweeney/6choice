@@ -3,10 +3,25 @@
     "scenes": [
         {
             "name": "Title",
-            "immediateText": "Game loaded!",
+            "immediateText": " ",
             "choices": [{
                 "text": "PLAY",
-                "actions": ["goto Prologue.narratorStart"]
+                "actions": ["goto Prologue.whoYou"]
+            }, {
+                "text": "CREDITS",
+                "actions": ["goto Prologue.credits"]
+            }]
+        },
+        {
+            "name": "Prologue.credits",
+            "immediateText": "Ah, hello! It seems you're interested in learning more about our \"company\". <newline><newline>Well, we're a small little company composed of our overworked staff, NARRATOR, Narrator, and narrator. Of course, that is the story department. Behind the scenes there a bunch of artists helping draw all of the backgrounds and such. Well, (<italics>you hear someone chuckling</italics>) we're just the company staff; the main project is run by the executives. There's the one who coded all of this, @uqers; the main artist and secondary writer, @endermb_; and this project's planner and writer, @em_fire.  <newline><newline> <italics>Do I even exist?</italics>",
+            "actions": [
+                "sleep 1200",
+                "stay"
+            ],
+            "choices": [{
+                "text": "RETURN",
+                "actions": "goto Title"
             }]
         },
         {
@@ -69,9 +84,9 @@
             "name": "Prologue.whoYou",
             "text": "The more pressing question here is<pause>.<pause>.<pause>.<pause><pause>who are <italics>you</italics>?",
             "actions": [
-                "sleep 1500",
+                "sleep 300",
                 "setvar nameVar %input Who are you?",
-                "sleep 1200",
+                "sleep 500",
                 "continue"
             ],
             "choices": []
@@ -80,8 +95,8 @@
             "name": "Prologue.narratorHello",
             "randomTexts": [
                 "Oh, <var>nameVar</var>! <pause><pause>It’s a pleasure to meet you.",
-                "\"<var>nameVar</var>\", you say? <pause><pause>How... curious.",
-                "Hmm? Your name is <var>nameVar</var>? <pause><pause>By any chance, would you know-<pause><pause> Ah, but you wouldn’t. <pause><pause>Nevermind!"
+                "\"<var>nameVar</var>\", you say? <pause><pause>How... <pause>curious.",
+                "Hmm? <pause><pause>Your name is <var>nameVar</var>? <pause><pause>By any chance, would you know-<pause><pause> Ah, but you wouldn’t. <pause><pause>Nevermind!"
             ],
             "choices": [{
                 "text": "...",
@@ -193,14 +208,14 @@
             "name": "Prologue.chooseStartingStatus",
             "text": "So, mon ami, where is your place of residence? <pause><pause>Maintaining connections like <italics>this</italics> (You get a vague idea that NARRATOR is waving ‘his’ hands around in a rather pitiful attempt to gesture at ‘his’ beautiful, mahogany desk) takes quite an effort. <pause><pause>Besides, I should visit you from time to time, as friends do.",
             "choices": [{
-                "text": "The slums",
-                "actions": "goto Prologue.startSlums"
+                "text": "The slums.",
+                "actions": "goto Prologue.slumsInfo"
             }, {
-                "text": "Middle-class",
-                "actions": "goto Prologue.startSlums"
+                "text": "A small apartment, far from the city center.",
+                "actions": "goto Prologue.boringInfo"
             }, {
-                "text": "Legacy",
-                "actions": "goto Prologue.startSlums"
+                "text": "My clan’s mansion.",
+                "actions": "goto Prologue.legacyInfo"
             }]
         }
     ]

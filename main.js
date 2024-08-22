@@ -66,7 +66,7 @@ async function main() {
     };
 
     let setDisplayedText = function(displayedTextValue) {
-        displayedText.innerText = displayedTextValue;
+        displayPrintedText(displayedTextValue, true);
     };
 
     let openTextPopup = function(text) {
@@ -92,7 +92,7 @@ async function main() {
     };
 
     const globalVars = new Map();
-    let displayPrintedText = async function(displayedTextValue) {
+    let displayPrintedText = async function(displayedTextValue, noSleep=false) {
         const PAUSE = "<pause>";
         const NEWLINE = "<newline>";
         const BOLD_START = "<bold>";
@@ -102,7 +102,8 @@ async function main() {
         const VAR_START = "<var>";
         const VAR_END = "</var>";
 
-        const waitTime = Math.floor(37 - (displayedTextValue.length / 36));
+        const waitTime = Math.floor(36 - (displayedTextValue.length / 72));
+
         let summedValue = "";
         let bolding = 0;
         let italicization = 0;
@@ -111,7 +112,7 @@ async function main() {
         for (let i = 0; i < displayedTextValue.length; i ++) {
             if (displayedTextValue.slice(i).startsWith(PAUSE)) {
                 // A pause.
-                await sleep(waitTime * 13);
+                if (!noSleep) await sleep(waitTime * 13);
                 i += PAUSE.length - 1;
                 continue;
             }
@@ -119,7 +120,7 @@ async function main() {
             if (displayedTextValue.slice(i).startsWith(NEWLINE)) {
                 summedValue += "<br>";
                 displayedText.innerHTML = summedValue;
-                await sleep(waitTime);
+                if (!noSleep) await sleep(waitTime);
                 i += NEWLINE.length - 1;
                 continue;
             }
@@ -186,7 +187,7 @@ async function main() {
                     for (let j = 0; j < variableValue.toString().length; j ++) {
                         summedValue += prefix + variableValue.toString()[j].replaceAll("<", "&lt;").replaceAll(">", "&gt;") + suffix;
                         displayedText.innerHTML = summedValue;
-                        await sleep(waitTime);
+                        if (!noSleep) await sleep(waitTime);
                     }
                     gettingVariable = false;
                     i += VAR_END.length - 1;
@@ -212,7 +213,7 @@ async function main() {
 
             summedValue += prefix + displayedTextValue[i].replaceAll("<", "&lt;").replaceAll(">", "&gt;") + suffix;
             displayedText.innerHTML = summedValue;
-            await sleep(waitTime);
+            if (!noSleep) await sleep(waitTime);
         }
     };
 
@@ -317,7 +318,7 @@ async function main() {
                     resolveFn({});
                     break;
                 case "sleep":
-                    const parsed = parseInt(operands[0]);
+                    const parsed = parseInt(operands);
                     if (!isNaN(parsed)) {
                         if (parsed < 10000) {
                             await sleep(parsed);
