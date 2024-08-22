@@ -94,6 +94,7 @@ async function main() {
     const globalVars = new Map();
     let displayPrintedText = async function(displayedTextValue) {
         const PAUSE = "<pause>";
+        const NEWLINE = "<newline>";
         const BOLD_START = "<bold>";
         const BOLD_END = "</bold>";
         const ITALICS_START = "<italics>";
@@ -112,6 +113,14 @@ async function main() {
                 // A pause.
                 await sleep(waitTime * 13);
                 i += PAUSE.length - 1;
+                continue;
+            }
+
+            if (displayedTextValue.slice(i).startsWith(NEWLINE)) {
+                summedValue += "<br>";
+                displayedText.innerHTML = summedValue;
+                await sleep(waitTime);
+                i += NEWLINE.length - 1;
                 continue;
             }
 
@@ -356,8 +365,12 @@ async function main() {
                 const text = texts[Math.floor(Math.random() * texts.length)];
 
                 await displayPrintedText(text);
+            } else if (scene.hasOwnProperty("immediateText")) {
+                const text = scene.immediateText;
+
+                setDisplayedText(text);
             } else {
-                throw new Error("Scene had neither randomTexts or text property");
+                throw new Error("Scene had neither randomTexts, immediateText, or text property");
             }
 
             await sleep(400);

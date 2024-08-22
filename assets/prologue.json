@@ -3,7 +3,7 @@
     "scenes": [
         {
             "name": "Title",
-            "text": "Game loaded!",
+            "immediateText": "Game loaded!",
             "choices": [{
                 "text": "PLAY",
                 "actions": ["goto Prologue.narratorStart"]
