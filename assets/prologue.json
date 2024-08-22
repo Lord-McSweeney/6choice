@@ -3,10 +3,21 @@
     "scenes": [
         {
             "name": "Title",
-            "immediateText": "Game loaded!",
+            "text": "Game loaded!",
             "choices": [{
                 "text": "PLAY",
                 "actions": ["goto Prologue.narratorStart"]
+            }, {
+                "text": "CREDITS",
+                "actions": ["goto Prologue.credits"]
+            }]
+        },
+        {
+            "name": "Prologue.credits",
+            "text": "Ah well hello! It seems you're interested in learning more about our \"company\". <pause> <newline> <newline> Well, we're a small little company composed of our overworked staff the NARRATOR, Narrator, and narrator. <pause> Of course that is the story department. Behind the scenes there a bunch of artists helping draw all of the backgrounds and such. Well, <italics>(you hear someone chuckling)</italics> we're just the company staff, the main project is run by the executives. There's the one who coded all of this @uqers, the main artist and secondary writer, @endermb_, and this project's planner and writer, @em_fire. <pause> <newline> <italics> Do I even exsist? </italics>",
+            "choices": [{
+                "text": "RETURN",
+                "actions": "goto Title"
             }]
         },
         {
