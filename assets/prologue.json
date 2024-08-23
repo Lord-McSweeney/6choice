@@ -14,7 +14,7 @@
         },
         {
             "name": "Prologue.credits",
-            "immediateText": "Ah, hello! It seems you're interested in learning more about our \"company\". <newline><newline>Well, we're a small little company composed of our overworked staff, NARRATOR, Narrator, and narrator. Of course, that is the story department. Behind the scenes there a bunch of artists helping draw all of the backgrounds and such. Well, (<italics>you hear someone chuckling</italics>) we're just the company staff; the main project is run by the executives. There's the one who coded all of this, @uqers; the main artist and secondary writer, @endermb_; and this project's planner and writer, @em_fire.  <newline><newline> <italics>Do I even exist?</italics>",
+            "immediateText": "Ah, hello! It seems you're interested in learning more about our \"company\". <newline><newline>Well, we're a small little company composed of our overworked staff, NARRATOR, Narrator, and narrator. Of course, that is the story department. Behind the scenes there a bunch of artists helping draw all of the backgrounds and such. Well, (<italics>you hear someone chuckling</italics>) we're just the company staff; the main project is run by the executives. There's the one who coded all of this, @uqers; the main artist and writer, @endermb_; and this project's planner and secondary writer, @em_fire.  <newline><newline> <italics>Do I even exist?</italics>",
             "actions": [
                 "sleep 1200",
                 "stay"
