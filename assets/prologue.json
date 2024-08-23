@@ -280,7 +280,7 @@
         },
         {
             "name": "Prologue.boringInfo",
-            "text": "I see, I see... <pause><pause>Steady work, a roof over your head, and a modest amount of comfort... <pause><pause>but perhaps also a touch of monotony? <pause><pause>It's a life where opportunities can be limited.<newline><newline>",
+            "text": "I see, I see... <pause><pause>Schoolwork, a roof over your head, and a modest amount of comfort... <pause><pause>but perhaps also a touch of monotony? <pause><pause>It's a life where opportunities can be limited.<newline><newline>",
             "actions": [
                 "setvar startingStatus \"middle class\" ",
                 "sleep 1200",
