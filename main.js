@@ -1,4 +1,6 @@
 async function main() {
+    console.log("Started game!");
+
     const displayedText = document.getElementById("displayedText");
     const displayedImage = document.getElementById("displayedImage");
     const characterInfo = document.getElementById("characterInfo");
@@ -218,13 +220,12 @@ async function main() {
         }
     };
 
-    const loadedScripts = new Map();
     let getScript = async function(script) {
-        if (loadedScripts.has(script)) {
-            return loadedScripts.get(script);
+        if (window.loadedScripts.has(script)) {
+            return window.loadedScripts.get(script);
         } else {
             const scriptData = await (await fetch("assets/" + script + ".json")).json();
-            loadedScripts.set(script, scriptData);
+            window.loadedScripts.set(script, scriptData);
             return scriptData;
         }
     };
@@ -449,6 +450,6 @@ async function main() {
     await runScript("awakening");
 }
 
-document.addEventListener("DOMContentLoaded", function(e) {
+window.addEventListener("resourceLoadComplete", function(e) {
     main();
 });

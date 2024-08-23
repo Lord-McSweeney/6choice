@@ -2,55 +2,62 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title> SS Game Prologue </title>
+        <title> Choice 7 </title>
+
         <link rel="stylesheet" href="styles.css">
+        <script src="main.js"></script>
+        <script src="load.js"></script>
     </head>
     <body>
-        <div id="mainContent">
-            <div id="title">
-                SS Game Prologue
-            </div>
-            <div id="container">
-                <div id="displayedImage">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-                </div>
-                <div id="displayedText">
-                    <span>
+        <div id="loadingContainer">
+            <p id="loadingInfo"> Loading... </p>
+        </div>
 
+        <div id="stylingContainer">
+            <div id="mainContent" style="display: none;">
+                <div id="title">
+                    Choice 7
+                </div>
+                <div id="container">
+                    <div id="displayedImage">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                    </div>
+                    <div id="displayedText">
+                        <span>
+
+                        </span>
+                    </div>
+                    <span id="choice1" class="aligned choice">
+                        <span> ... </span>
                     </span>
+                    <span id="choice2" class="aligned choice">
+                        <span> ... </span>
+                    </span>
+                    <span id="choice3" class="aligned choice">
+                        <span> ... </span>
+                    </span>
+                    <span id="choice4" class="aligned choice">
+                        <span> ... </span>
+                    </span>
+                    <span id="choice5" class="aligned choice">
+                        <span> ... </span>
+                    </span>
+                    <span id="choice6" class="aligned choice">
+                        <span> ... </span>
+                    </span>
+                    <div id="characterInfo">
+                        Character Info
+                    </div>
                 </div>
-                <span id="choice1" class="aligned choice">
-                    <span> ... </span>
-                </span>
-                <span id="choice2" class="aligned choice">
-                    <span> ... </span>
-                </span>
-                <span id="choice3" class="aligned choice">
-                    <span> ... </span>
-                </span>
-                <span id="choice4" class="aligned choice">
-                    <span> ... </span>
-                </span>
-                <span id="choice5" class="aligned choice">
-                    <span> ... </span>
-                </span>
-                <span id="choice6" class="aligned choice">
-                    <span> ... </span>
-                </span>
-                <div id="characterInfo">
-                    Character Info
+            </div>
+            <div id="popup" style="display: none;">
+                <p id="popupText"></p>
+
+                <div id="popupSubmission">
+                    <input id="popupInput"></input>
+                    <button id="popupSubmit">Submit</button>
                 </div>
             </div>
         </div>
-        <div id="popup">
-            <p id="popupText"></p>
-
-            <div id="popupSubmission">
-                <input id="popupInput"></input>
-                <button id="popupSubmit">Submit</button>
-            </div>
-        </div>
-
-        <script src="main.js"></script>
     </body>
 </html>
