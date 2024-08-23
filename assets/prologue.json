@@ -6,10 +6,10 @@
             "immediateText": " ",
             "choices": [{
                 "text": "PLAY",
-                "actions": ["goto Prologue.whoYou"]
+                "actions": "goto Prologue.narratorStart"
             }, {
                 "text": "CREDITS",
-                "actions": ["goto Prologue.credits"]
+                "actions": "goto Prologue.credits"
             }]
         },
         {
@@ -82,10 +82,10 @@
         },
         {
             "name": "Prologue.whoYou",
-            "text": "The more pressing question here is<pause>.<pause>.<pause>.<pause><pause>who are <italics>you</italics>?",
+            "text": "The more pressing question here is<pause>.<pause>.<pause>. <pause><pause>who are <italics>you</italics>?",
             "actions": [
                 "sleep 300",
-                "setvar nameVar %input Who are you?",
+                "setvar nameVar %input What is your name?",
                 "sleep 500",
                 "continue"
             ],
@@ -111,13 +111,13 @@
                 "stay"
             ],
             "choices": [{
-                "text": "Yes",
+                "text": "Yes...?",
                 "actions": "goto Prologue.isHuman"
             }]
         },
         {
             "name": "Prologue.notHuman",
-            "text": "Oh, <italics>mon dieu</italics>! <pause><pause>If I may... What species are you?",
+            "text": "Oh, <italics>mon dieu</italics>! <pause><pause>If I may... <pause>What species are you?",
             "choices": []
         },
         {
@@ -170,7 +170,7 @@
         },
         {
             "name": "Prologue.isIndividual",
-            "text": "Je n’en reviens pas! <pause><pause>You are one of those? <pause><pause>Oh, I mean no offense by it, of course. <pause><pause>It’s just been so long! <pause><pause>I am <bold>too</bold> happy.",
+            "text": "Je n’en reviens pas! <pause><pause>You are one of <italics>those</italics>? <pause><pause>Oh, I mean no offense by it, of course. <pause><pause>It’s just been so long! <pause><pause>I am <bold>too</bold> happy.",
              "choices": [{
                 "text": "...",
                 "actions": "goto Prologue.chooseStartingStatus"
@@ -192,7 +192,7 @@
         },
         {
             "name": "Prologue.isGentleman",
-            "text": "Interesting! <pause><pause>You know, I like to consider myself something of a ‘gentleman,’ <pause>although I technically do not have a gender.",
+            "text": "Interesting! <pause><pause>You know, I like to consider myself something of a ‘gentleman,’ <pause>although I technically do not <italics>have<italics> a gender.",
             "actions": [
                 "setvar titlePlay \"gentleman\"",
                 "setvar subjPlay \"he\"",
@@ -208,14 +208,295 @@
             "name": "Prologue.chooseStartingStatus",
             "text": "So, mon ami, where is your place of residence? <pause><pause>Maintaining connections like <italics>this</italics> (You get a vague idea that NARRATOR is waving ‘his’ hands around in a rather pitiful attempt to gesture at ‘his’ beautiful, mahogany desk) takes quite an effort. <pause><pause>Besides, I should visit you from time to time, as friends do.",
             "choices": [{
-                "text": "The slums.",
+                "text": "An abandoned warehouse in the slums.",
                 "actions": "goto Prologue.slumsInfo"
             }, {
-                "text": "A small apartment, far from the city center.",
+                "text": "A small apartment building.",
                 "actions": "goto Prologue.boringInfo"
             }, {
-                "text": "My clan’s mansion.",
+                "text": "My Legacy clan’s mansion.",
                 "actions": "goto Prologue.legacyInfo"
+            }]
+        },
+        {
+            "name": "Prologue.slumsInfo",
+            "text": "Sacré bleu! <pause><pause>The slums, hm? <pause><pause>A harsh place, where every day is a battle for survival, and trust is a rare commodity. <pause><pause>Life there shapes you, doesn’t it? <pause><pause>They say those who survive the slums are either the toughest or the cleverest. <pause><pause>Good on you!<newline><newline>",
+            "actions": [
+                "setvar startingStatus \"slums\" ",
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
+        },
+        {
+            "randomTexts": [
+                "You must have seen the world at its rawest, unfiltered and unforgiving.",
+                "I’ve heard that the slums either break you or make you unbreakable.",
+                "The slums can be cruel, but they also breed those who are unyielding in the face of adversity."
+            ],
+            "retainPreviousText": true,
+            "choices": [{
+                "text": "...",
+                "actions": "continue"
+            }]
+        },
+        {
+            "text": "<newline><newline>I’m curious, <var>nameVar</var>. <pause><pause>How did <italics>you</italics> survive such a brutal environment?",
+            "retainPreviousText": true,
+            "choices": [{
+                "text": "I kept my head down.",
+                "actions": "goto Prologue.slums.keptHeadDown"
+            }, {
+                "text": "I fought to survive.",
+                "actions": "goto Prologue.slums.foughtToSurvive"
+            }, {
+                "text": "I used my wits.",
+                "actions": "goto Prologue.slums.usedWits"
+            }]
+        },
+        {
+            "name": "Prologue.slums.keptHeadDown",
+            "text": "Survival by caution, hm? <pause><pause>Some might say it’s cowardly, but I think I’d do the same if I were you! <pause><pause>After all, those who’ve mastered the art of staying unnoticed often find themselves alive to see another day.<newline><newline><pause><pause><pause>...That’s something people say, right?",
+            "choices": [{
+                "text": "...",
+                "actions": "goto Prologue.lovelyToKnowYou"
+            }]
+        },
+        {
+            "name": "Prologue.slums.foughtToSurvive",
+            "text": "Ah, the fighter’s spirit! <pause><pause>How I wish I had such a thing! <pause><pause>You know, my own <italics>mother</italics>- <pause><pause>Actually, nevermind... <pause><pause>A-ahem! <pause><pause>You’ve faced hardship head-on and come out the other side, hardened and ready for more. <pause><pause>After all, those who’ve endured the worst have little left to fear.<newline><newline><pause><pause><pause>...Humans like to say this, no?",
+            "choices": [{
+                "text": "...",
+                "actions": "goto Prologue.lovelyToKnowYou"
+            }]
+        },
+        {
+            "name": "Prologue.slums.usedWits",
+            "text": "Ah, a <italics>thinker</italics>! <pause><pause>That’s quite rare these days. <pause><pause>Not everyone has the ability to outmaneuver danger, especially not me! <pause><pause>Cunning can be just as valuable as strength, if not more. <pause><pause>After all, those who’ve the ability to think on their feet often find ways out of the most dire of situations!<newline><newline><pause><pause><pause>What do you mean \"that’s not how you use the contraction\"? <pause><pause>How would you use it, then? <pause><pause>Hm?",
+            "choices": [{
+                "text": "...",
+                "actions": "goto Prologue.lovelyToKnowYou"
+            }]
+        },
+        {
+            "name": "Prologue.boringInfo",
+            "text": "I see, I see... <pause><pause>Steady work, a roof over your head, and a modest amount of comfort... <pause><pause>but perhaps also a touch of monotony? <pause><pause>It's a life where opportunities can be limited.<newline><newline>",
+            "actions": [
+                "setvar startingStatus \"middle class\" ",
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
+        },
+        {
+            "randomTexts": [
+                "Perhaps you yearned for something more exciting?",
+                "Perhaps you longed for a break?",
+                "Perhaps you found contentment in the stability it provided?"
+            ],
+            "retainPreviousText": true,
+            "choices": [{
+                "text": "...",
+                "actions": "continue"
+            }]
+        },
+        {
+            "text": "<newline><newline>But I wonder, how did the average life shape <italics>you</italics>, <var>nameVar</var>? <pause><pause>Were you the diligent sort, always striving to maintain the status quo? <pause><pause>Or did you harbor dreams of something greater, something that your station couldn’t satisfy?",
+            "retainPreviousText": true,
+            "choices": [{
+                "text": "I was content.",
+                "actions": "goto Prologue.apartment.wasContent"
+            }, {
+                "text": "I wanted more.",
+                "actions": "goto Prologue.apartment.wantedMore"
+            }, {
+                "text": "It was a struggle to keep up.",
+                "actions": "goto Prologue.apartment.struggled"
+            }]
+        },
+        {
+            "name": "Prologue.apartment.wasContent",
+            "text": "Contentment! <pause><pause>Ah, yes, what a rare and precious state of mind! <pause><pause>Those who find satisfaction in their station often have a peace of mind that many seek but never find. <pause><pause>I doubt I’ll ever have it, at least. <pause><pause>After all, those who’ve achieved a serene heart can weather many storms... <pause>or at least that’s what I hear.<newline><newline><pause><pause><pause>...You don’t hear much up here, where I am. <pause><pause>It has a lovely view, though. <pause><pause>The sunset is gorgeous!",
+            "choices": [{
+                "text": "...",
+                "actions": "goto Prologue.lovelyToKnowYou"
+            }]
+        },
+        {
+            "name": "Prologue.apartment.wantedMore",
+            "text": "Aha, the spirit of ambition! <pause><pause>How thrilling! <pause><pause>Those who yearn for more are often driven by an inner fire that can lead to great things... <pause>or, at least, to more exciting tales! <pause><pause>After all, those who’ve chased their dreams often find themselves on quite the adventure... <pause>or at least in the middle of a lot of paperwork.<newline><newline><pause><pause><pause>...Does that ever happen to you, too?",
+            "choices": [{
+                "text": "...",
+                "actions": "goto Prologue.lovelyToKnowYou"
+            }]
+        },
+        {
+            "name": "Prologue.apartment.struggled",
+            "text": "A struggle, hm? <pause><pause>The fear of falling, of losing what you’ve worked so hard to keep... <pause>it’s no easy thing. <pause><pause>Those who’ve struggled often develop a resilience that others lack... <pause>or so I’ve heard.<newline><newline><pause><pause><pause>...Perhaps that struggle has made you humans stronger, more resourceful?",
+            "choices": [{
+                "text": "...",
+                "actions": "goto Prologue.lovelyToKnowYou"
+            }]
+        },
+        {
+            "name": "Prologue.legacyInfo",
+            "text": "A Legacy! <pause><pause>C’est incroyable! <pause><pause>Your name alone opens doors that remain forever closed to others. <pause><pause>But such privilege comes with its own burdens, does it not? <pause><pause>Expectations are high, and the world watches your every move.<newline><newline>",
+            "actions": [
+                "setvar startingStatus \"legacy\" ",
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
+        },
+        {
+            "randomTexts": [
+                "To be a Legacy is to be both blessed and cursed.",
+                "The pressure to live up to your ancestors’ achievements must be immense.",
+                "It’s said that those born into wealth often find themselves trapped by it, their paths predetermined by the weight of their family name."
+            ],
+            "retainPreviousText": true,
+            "choices": [{
+                "text": "...",
+                "actions": "continue"
+            }]
+        },
+        {
+            "text": "<newline><newline>Tell me, <var>nameVar</var>, how did you handle the life of a Legacy? <pause><pause>Were you proud of your heritage, eager to embrace your family name? <pause><pause>Or did you long to break free from the constraints of your lineage and forge your own path?",
+            "retainPreviousText": true,
+            "choices": [{
+                "text": "I embraced my heritage.",
+                "actions": "goto Prologue.legacy.embracedHeritage"
+            }, {
+                "text": "I felt trapped by it.",
+                "actions": "goto Prologue.legacy.feltTrapped"
+            }, {
+                "text": "I used it to my advantage.",
+                "actions": "goto Prologue.legacy.usedToAdvantage"
+            }]
+        },
+        {
+            "name": "Prologue.legacy.embracedHeritage",
+            "text": "Embracing your heritage, how noble! <pause><pause>Carrying on the legacy must have been both an honor and a challenge. <pause><pause>Did you ever feel the weight of expectations bearing down on you? <pause><pause>Feels just like a ceiling caving down on you while the exit door to the office is locked, so you can’t even escape your impending doom, haha!<newline><newline><pause><pause><pause>...Just for the record, I <italics>do</italics> like my job. <pause><pause>Mostly.",
+            "choices": [{
+                "text": "...",
+                "actions": "goto Prologue.lovelyToKnowYou"
+            }]
+        },
+        {
+            "name": "Prologue.legacy.feltTrapped",
+            "text": "Ah, the golden cage! <pause><pause>How many have dreamt of living in luxury, never realizing that those who do are prisoners in a gilded prison? <pause><pause>It must have felt like every step you took was already mapped out for you, a preordained path that left little room for your own desires. But I suppose even a bird in a cage can still sing.<newline><newline><pause><pause><pause>...Speaking of birds, I used to have one up here. <pause><pause>It flew away into the distance one day, and never returned.",
+            "choices": [{
+                "text": "...",
+                "actions": "goto Prologue.lovelyToKnowYou"
+            }]
+        },
+        {
+            "name": "Prologue.legacy.usedToAdvantage",
+            "text": "Ah, a pragmatist! <pause><pause>A Legacy who understands that power and privilege can be tools as much as they can be chains. <pause><pause>You must have navigated the world like a chessboard, each move calculated, every opportunity seized. <pause><pause>I imagine there were those who envied your position, perhaps even feared it.<newline><newline><pause><pause><pause>...I suppose I can relate to that; <pause>the Company cherishes its most beloved employees, after all! <pause><pause>The rest are just cannon fodder... <pause><pause>Not me, though.",
+            "choices": [{
+                "text": "...",
+                "actions": "goto Prologue.lovelyToKnowYou"
+            }]
+        },
+        {
+            "name": "Prologue.lovelyToKnowYou",
+            "text": "Well, <var>nameVar</var>, it’s been lovely getting to know you. <pause><pause>Anything you would like to ask me before I send you back to where you were?",
+            "choices": [{
+                "text": "Nope, let’s get started.",
+                "actions": "endscene"
+            }, {
+                "text": "What’s the game about?",
+                "actions": "goto Prologue.aboutGame"
+            }, {
+                "text": "Are you French?",
+                "actions": "goto Prologue.narratorFrench"
+            }, {
+                "text": "Do you really like your job?",
+                "actions": "goto Prologue.narratorLikesJob"
+            }]
+        },
+        {
+            "name": "Prologue.lovelyToKnowYouAgain",
+            "text": "Anything else you would like to ask me before I send you back to where you were?",
+            "choices": [{
+                "text": "Nope, let’s get started.",
+                "actions": "endscene"
+            }, {
+                "text": "What’s the game about?",
+                "actions": "goto Prologue.aboutGame"
+            }, {
+                "text": "Are you French?",
+                "actions": "goto Prologue.narratorFrench"
+            }, {
+                "text": "Do you really like your job?",
+                "actions": "goto Prologue.narratorLikesJob"
+            }]
+        },
+        {
+            "name": "Prologue.lovelyToKnowYouAgainDontAsk",
+            "text": "Anything else you would like to ask me before I send you back to where you were?",
+            "choices": [{
+                "text": "Nope, let’s get started.",
+                "actions": "endscene"
+            }, {
+                "text": "What’s the game about?",
+                "actions": "goto Prologue.aboutGame"
+            }, {
+                "text": "Are you French?",
+                "actions": "goto Prologue.narratorFrench"
+            }]
+        },
+        {
+            "name": "Prologue.aboutGame",
+            "text": "It’s a choose-your-own-adventure game that’s set in the Shadow Slave universe. <pause><pause>The main focus of this game is the Antartica arc, due to the CWO and CTO of the Company. <pause><pause>Apparently, the two got too frustrated with the workload, refusing to write and code multiple variations of a Second Nightmare. <pause><pause>Can’t blame them, though.",
+            "choices": [{
+                "text": "...Okay.",
+                "actions": "goto Prologue.lovelyToKnowYouAgain"
+            }]
+        },
+        {
+            "name": "Prologue.narratorFrench",
+            "text": "Actually, 事​​实​​上​​，​​我​​是​​中​​国​​人。<pause><pause>我​​一​​直​​用​​法​​语​​跟​​你​​说​​话​​就​​是​​为​​了​​看​​看​​你​​是​​不​​是​​会​​问​​我​​这​​个​​问​​题​​。​<pause><pause>Haha, just kidding! To <bold>you</bold>, I’m just a system, so how can I be of any human nationality?",
+            "choices": [{
+                "text": "...",
+                "actions": "goto Prologue.lovelyToKnowYouAgain"
+            }]
+        },
+        {
+            "name": "Prologue.narratorLikesJob",
+            "immediateText": "Yes.",
+            "choices": [{
+                "text": "Really?",
+                "actions": "continue"
+            }]
+        },
+        {
+            "text": "Yes. I need this job.",
+            "choices": [{
+                "text": "Are you sure?",
+                "actions": "continue"
+            }]
+        },
+        {
+            "text": "...Stop asking. I'm sure.",
+            "choices": [{
+                "text": "[stop asking]",
+                "actions": "goto Prologue.lovelyToKnowYouAgain"
+            }, {
+                "text": "[stop asking]",
+                "actions": "goto Prologue.lovelyToKnowYouAgain"
+            }, {
+                "text": "[stop asking]",
+                "actions": "goto Prologue.lovelyToKnowYouAgain"
+            }, {
+                "text": "[stop asking]",
+                "actions": "goto Prologue.lovelyToKnowYouAgain"
+            }, {
+                "text": "[stop asking]",
+                "actions": "goto Prologue.lovelyToKnowYouAgain"
+            }, {
+                "text": "[stop asking]",
+                "actions": "goto Prologue.lovelyToKnowYouAgain"
             }]
         }
     ]

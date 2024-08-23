@@ -31,9 +31,9 @@ async function main() {
         "2vw",
         "1.8vw",
         "1.5vw",
-        "1.4vw",
-        "1.4vw",
-        "1.4vw"
+        "1.2vw",
+        "1.2vw",
+        "1.2vw"
     ];
 
     let setChoicesTo = function(choiceInfo) {
@@ -66,7 +66,7 @@ async function main() {
     };
 
     let setDisplayedText = function(displayedTextValue) {
-        displayPrintedText(displayedTextValue, true);
+        displayPrintedText(displayedTextValue, false, true);
     };
 
     let openTextPopup = function(text) {
@@ -92,7 +92,7 @@ async function main() {
     };
 
     const globalVars = new Map();
-    let displayPrintedText = async function(displayedTextValue, noSleep=false) {
+    let displayPrintedText = async function(displayedTextValue, retainPrevious=false, noSleep=false) {
         const PAUSE = "<pause>";
         const NEWLINE = "<newline>";
         const BOLD_START = "<bold>";
@@ -104,7 +104,8 @@ async function main() {
 
         const waitTime = Math.floor(36 - (displayedTextValue.length / 72));
 
-        let summedValue = "";
+        let summedValue = retainPrevious ? displayedText.innerHTML : "";
+        displayedText.innerHTML = summedValue;
         let bolding = 0;
         let italicization = 0;
         let variableBuffer = "";
@@ -275,6 +276,8 @@ async function main() {
         let runAction = async function(action, resolveFn) {
             let getValue = async function(operands, offset) {
                 const data = operands.split(" ")[offset];
+                const multiSpaceData = operands.split(" ").slice(offset).join(" ");
+
                 if (data === "%input") {
                     const printedText = operands.split(" ").slice(offset + 1).join(" ");
                     return await openTextPopup(printedText);
@@ -298,8 +301,8 @@ async function main() {
                     } else {
                         throw new Error("Tried to access undefined variable " + operands);
                     }
-                } else if (data.startsWith('"') && data.endsWith('"')) {
-                    return data.slice(1).slice(0, -1);
+                } else if (multiSpaceData.startsWith('"') && multiSpaceData.endsWith('"')) {
+                    return multiSpaceData.slice(1).slice(0, -1);
                 } else {
                     throw new Error("Invalid value " + operands);
                 }
@@ -317,6 +320,12 @@ async function main() {
                 case "stay":
                     resolveFn({});
                     break;
+
+                case "endscene":
+                    exited = true;
+                    resolveFn({});
+                    break;
+
                 case "sleep":
                     const parsed = parseInt(operands);
                     if (!isNaN(parsed)) {
@@ -329,6 +338,7 @@ async function main() {
                         throw new Error("Bad sleep duration \"" + operands[0] + "\"");
                     }
                     break;
+
                 case "setvar":
                     const variableName = operands.split(" ")[0];
                     const data = await getValue(operands, 1);
@@ -337,6 +347,7 @@ async function main() {
                         globalVars.set(variableName, data);
                     }
                     break;
+
                 default:
                     throw new Error("Unknown op " + op);
             }
@@ -355,17 +366,19 @@ async function main() {
 
         let runScene = async function(scene) {
             setChoicesTo([]);
-            setDisplayedText("");
+            if (!scene.retainPreviousText) {
+                setDisplayedText("");
+            }
 
             if (scene.hasOwnProperty("text")) {
                 const text = scene.text;
 
-                await displayPrintedText(text);
+                await displayPrintedText(text, true);
             } else if (scene.hasOwnProperty("randomTexts")) {
                 const texts = scene.randomTexts;
                 const text = texts[Math.floor(Math.random() * texts.length)];
 
-                await displayPrintedText(text);
+                await displayPrintedText(text, true);
             } else if (scene.hasOwnProperty("immediateText")) {
                 const text = scene.immediateText;
 
@@ -379,12 +392,11 @@ async function main() {
             if (scene.hasOwnProperty("actions")) {
                 let result = await new Promise(function(resolve) {
                     runActions(scene.actions, function(info) {
-                        console.log("Ran actions and called resolve");
                         resolve(info);
                     });
                 });
 
-                if (result.hasOwnProperty("goto")) {
+                if (result.hasOwnProperty("goto") || exited) {
                     return result;
                 }
             }
@@ -429,6 +441,12 @@ async function main() {
     setChoicesTo([]);
 
     await runScript("prologue");
+
+    setDisplayedText("");
+    setChoicesTo([]);
+    await sleep(1500);
+
+    await runScript("awakening");
 }
 
 document.addEventListener("DOMContentLoaded", function(e) {
