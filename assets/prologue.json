@@ -14,11 +14,14 @@
         },
         {
             "name": "Prologue.credits",
-            "immediateText": "Ah, hello! It seems you're interested in learning more about our \"company\". <newline><newline>Well, we're a small little company composed of our overworked staff, NARRATOR, Narrator, and narrator. Of course, that is the story department. Behind the scenes there a bunch of artists helping draw all of the backgrounds and such. Well, (<italics>you hear someone chuckling</italics>) we're just the company staff; the main project is run by the executives. There's the one who coded all of this, @uqers; the main artist and writer, @endermb_; and this project's planner and secondary writer, @em_fire.  <newline><newline> <italics>Do I even exist?</italics>",
-            "actions": [
-                "sleep 1200",
-                "stay"
-            ],
+            "text": "Ah, hello there! <pause><pause>Curious about our Company, are you? <pause><pause>Well, let me give you a quick rundown.<newline><newline><pause><pause>We’re a cozy little operation with a slightly overworked but dedicated staff. <pause><pause>In the story department, it’s just me -<pause><pause> NARRATOR -<pause><pause> along with my esteemed colleagues, Narrator and narrator. <pause><pause>Of course, that is only the story department.",
+            "choices": [{
+                "text": "(continue)",
+                "actions": "continue"
+            }]
+        },
+        {
+            "text": "We’re not alone in this endeavor. <pause><pause>Behind the scenes, there’s a talented group of artists working tirelessly to bring all the backgrounds to life. <pause><pause><italics>You hear a soft chuckle and a faint ‘Pst!’ in the background.</italics> <pause><pause>But we’re just the humble staff; the real masterminds are our executives.<newline><newline><pause><pause>There’s the Chief Technology Officer, the savant genius who wrote all the code, uqers; <pause>the Chief Writing Officer, who drew all endings and penned every word, euriohh; <pause>and the Chief Executive Officer, the brilliant mind behind this project, Firey.",
             "choices": [{
                 "text": "RETURN",
                 "actions": "goto Title"
