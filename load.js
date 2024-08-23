@@ -28,7 +28,7 @@ async function loadMain() {
     // Preload the font and the prologue.
     let loadFunctions = [
         async function() {
-            const font = new FontFace("Choice 7 Font", "url(assets/DejaVuSerif.ttf)");
+            const font = new FontFace("Choice7Font", "url(assets/DejaVuSerif.ttf)");
             await font.load();
             document.fonts.add(font);
         },
