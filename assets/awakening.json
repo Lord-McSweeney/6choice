@@ -1,0 +1,10 @@
+{
+    "init": "Awakening.wake",
+    "scenes": [
+        {
+            "name": "Awakening.wake",
+            "text": "The world around you seems to shift as the white void surrounding you dissolves into a blurred mess of shapes and colors.",
+            "choices": []
+        }
+    ]
+}
