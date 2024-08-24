@@ -12,27 +12,33 @@
         {
             "name": "Prologue.narratorStart",
             "text": "Hello? <pause><pause>Hello.",
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "actions": [
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
         },
         {
-            "text": "One, two, three. <pause>Mic check!",
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "text": "<newline><newline>One, two, three. <pause>Mic check!",
+            "retainPreviousText": true,
+            "actions": [
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
         },
         {
-            "text": "Are you reading this?",
-            "choices": [{
-                "text": "...?",
-                "actions": "continue"
-            }]
+            "text": "<newline><newline>Are you reading this?",
+            "retainPreviousText": true,
+            "actions": [
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
         },
         {
-            "text": "Yes, yes, I’m talking about <bold>you</bold>, player.",
+            "text": "<newline><newline>Yes, yes, I’m talking about <bold>you</bold>, player.",
+            "retainPreviousText": true,
             "choices": [{
                 "text": "Who are you?",
                 "actions": "continue"
@@ -51,23 +57,28 @@
         },
         {
             "name": "Prologue.narratorImportant",
-            "text": "Oh! <pause>A curious one, I see. <pause>But who I am isn’t important.",
-            "choices": [{
-                "text": "...",
-                "actions": "goto Prologue.whoYou"
-            }]
+            "text": "<newline><newline>Player: \"Yes, it is.\" <newline>Oh! <pause>A curious one, I see. <pause>But who I am isn’t important.",
+            "retainPreviousText": true,
+            "actions": [
+                "sleep 1200",
+                "goto Prologue.whoYou"
+            ],
+            "choices": []
         },
         {
             "name": "Prologue.narratorNotImportant",
-            "text": "Merveilleux! <pause><pause>Keep that up. <pause><pause>Anyways...",
-            "choices": [{
-                "text": "...",
-                "actions": "goto Prologue.whoYou"
-            }]
+            "text": "<newline><newline>Player: \"No, it's not.\" <newline>Merveilleux! <pause><pause>Keep that up. <pause><pause>Anyways...",
+            "retainPreviousText": true,
+            "actions": [
+                "sleep 1200",
+                "goto Prologue.whoYou"
+            ],
+            "choices": []
         },
         {
             "name": "Prologue.whoYou",
-            "text": "The more pressing question here is<pause>.<pause>.<pause>. <pause><pause>who are <italics>you</italics>?",
+            "text": "<newline>The more pressing question here is<pause>.<pause>.<pause>. <pause><pause>who are <italics>you</italics>?",
+            "retainPreviousText": true,
             "actions": [
                 "sleep 300",
                 "setvar nameVar %input What is your name?",
@@ -83,14 +94,16 @@
                 "\"<var>nameVar</var>\", you say? <pause><pause>How... <pause>curious.",
                 "Hmm? <pause><pause>Your name is <var>nameVar</var>? <pause><pause>By any chance, would you know-<pause><pause> Ah, but you wouldn’t. <pause><pause>Nevermind!"
             ],
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "actions": [
+                "sleep 1200",
+                "goto Prologue.whoYou"
+            ],
+            "choices": []
         },
         {
             "name": "Prologue.narratorIntroduce",
-            "text": "Well, well, well...<pause><pause> <var>nameVar</var>, it seems we’re going to be great friends! <pause><pause>Although, for our friendship to last, I do believe I’ll need some way of referring to you that isn’t ‘you’ or ‘<var>nameVar</var>’. <pause><pause>Most humans adopt certain pron- <pause><pause>wait, you <italics>are</italics> human, correct?",
+            "text": "<newline>Well, well, well...<pause><pause> <var>nameVar</var>, it seems we’re going to be great friends! <pause><pause>Although, for our friendship to last, I do believe I’ll need some way of referring to you that isn’t ‘you’ or ‘<var>nameVar</var>’. <pause><pause>Most humans adopt certain pron- <pause><pause>wait, you <italics>are</italics> human, correct?",
+            "retainPreviousText": true,
             "actions": [
                 "setvar speciesVar \"human\" ",
                 "stay"
@@ -107,15 +120,18 @@
         },
         {
             "name": "Prologue.isHuman",
-            "text": "Ah, <italics>quel soulagement</italics>! <pause><pause>I was afraid I would’ve offended you.",
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "text": "<newline><newline><var>nameVar</var>: Yes...? <newline>Ah, <italics>quel soulagement</italics>! <pause><pause>I was afraid I would’ve offended you.",
+            "retainPreviousText": true,
+            "actions": [
+                "sleep 1200",
+                "goto Prologue.askGender"
+            ],
+            "choices": []
         },
         {
             "name": "Prologue.askGender",
-            "text": "Now, if I may ask, are you a lady or a gentleman?",
+            "text": "<newline><newline>Now, if I may ask, are you a lady or a gentleman?",
+            "retainPreviousText": true,
             "choices": [{
                 "text": "[Maintain an awkward silence]",
                 "actions": "goto Prologue.isAwkward"
@@ -145,8 +161,7 @@
             "name": "Prologue.isAwkward",
             "text": "Hmm? <pause><pause>Is something the matter?",
             "choices": [{
-                "text": "Yes. We live in a world where Nightmare Gates unleash horrors beyond comprehension and Awakened walk amongst us. Such mundane distinctions seem rather trivial, do they not? What value has ‘gender’ when the very fabric of our reality is frayed and torn? Perhaps it’s best we concerned ourselves with more pressing matters.",
-                "fontSize": "0.9vw",
+                "text": "Yes, There is a problem.",
                 "actions": "goto Prologue.isIndividual"
             }, {
                 "text": "...Nothing.",
@@ -155,7 +170,7 @@
         },
         {
             "name": "Prologue.isIndividual",
-            "text": "Je n’en reviens pas! <pause><pause>You are one of <italics>those</italics>? <pause><pause>Oh, I mean no offense by it, of course. <pause><pause>It’s just been so long! <pause><pause>I am <bold>too</bold> happy.",
+            "text": "<var>nameVar</var>: We live in a world where Nightmare Gates unleash horrors beyond comprehension and Awakened walk amongst us. Such mundane distinctions seem rather trivial, do they not? What value has ‘gender’ when the very fabric of our reality is frayed and torn? Perhaps it’s best we concerned ourselves with more pressing matters. <newline><newline> Je n’en reviens pas! <pause><pause>You are one of <italics>those</italics>? <pause><pause>Oh, I mean no offense by it, of course. <pause><pause>It’s just been so long! <pause><pause>I am <bold>too</bold> happy.",
             "actions": [
                 "setvar titlePlay \"individual\"",
                 "setvar subjPlay \"they\"",
@@ -169,7 +184,8 @@
         },
         {
             "name": "Prologue.isLady",
-            "text": "I see! <pause><pause>Very nice to meet you.",
+            "text": "<newline><newline><var>nameVar</var>: A lady <newline><newline>I see! <pause><pause>Very nice to meet you.",
+            "retainPreviousText"true,
             "actions": [
                 "setvar titlePlay \"lady\"",
                 "setvar subjPlay \"she\"",
@@ -183,7 +199,8 @@
         },
         {
             "name": "Prologue.isGentleman",
-            "text": "Interesting! <pause><pause>You know, I like to consider myself something of a ‘gentleman,’ <pause>although I technically do not <italics>have</italics> a gender.",
+            "text": "<newline><newline><var>nameVar</var>: A gentleman <newline><newline> Interesting! <pause><pause>You know, I like to consider myself something of a ‘gentleman,’ <pause>although I technically do not <italics>have</italics> a gender.",
+            "retainPreviousText": true,
             "actions": [
                 "setvar titlePlay \"gentleman\"",
                 "setvar subjPlay \"he\"",
@@ -391,7 +408,8 @@
         },
         {
             "name": "Prologue.lovelyToKnowYou",
-            "text": "Well, <var>nameVar</var>, it’s been lovely getting to know you. <pause><pause>Anything you would like to ask me before I send you back to where you were?",
+            "text": "<newline><newline>Well, <var>nameVar</var>, it’s been lovely getting to know you. <pause><pause>Anything you would like to ask me before I send you back to where you were?",
+            "retainPreviousText": true,
             "choices": [{
                 "text": "Nope, let’s get started.",
                 "actions": "endscript"
