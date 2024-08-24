@@ -57,7 +57,7 @@
         },
         {
             "name": "Prologue.narratorImportant",
-            "text": "<newline><newline>Player: \"Yes, it is.\" <newline>Oh! <pause>A curious one, I see. <pause>But who I am isn’t important.",
+            "text": "<newline><newline>Player: \"Yes, it is.\" <newline><newline>Oh! <pause>A curious one, I see. <pause>But who I am isn’t important.",
             "retainPreviousText": true,
             "actions": [
                 "sleep 1200",
@@ -67,7 +67,7 @@
         },
         {
             "name": "Prologue.narratorNotImportant",
-            "text": "<newline><newline>Player: \"No, it's not.\" <newline>Merveilleux! <pause><pause>Keep that up. <pause><pause>Anyways...",
+            "text": "<newline><newline>Player: \"No, it's not.\" <newline><newline>Merveilleux! <pause><pause>Keep that up. <pause><pause>Anyways...",
             "retainPreviousText": true,
             "actions": [
                 "sleep 1200",
@@ -77,7 +77,7 @@
         },
         {
             "name": "Prologue.whoYou",
-            "text": "<newline>The more pressing question here is<pause>.<pause>.<pause>. <pause><pause>who are <italics>you</italics>?",
+            "text": "<newline><newline>The more pressing question here is<pause>.<pause>.<pause>. <pause><pause>who are <italics>you</italics>?",
             "retainPreviousText": true,
             "actions": [
                 "sleep 300",
@@ -96,13 +96,13 @@
             ],
             "actions": [
                 "sleep 1200",
-                "goto Prologue.whoYou"
+                "goto Prologue.narratorIntroduce"
             ],
             "choices": []
         },
         {
             "name": "Prologue.narratorIntroduce",
-            "text": "<newline>Well, well, well...<pause><pause> <var>nameVar</var>, it seems we’re going to be great friends! <pause><pause>Although, for our friendship to last, I do believe I’ll need some way of referring to you that isn’t ‘you’ or ‘<var>nameVar</var>’. <pause><pause>Most humans adopt certain pron- <pause><pause>wait, you <italics>are</italics> human, correct?",
+            "text": "<newline><newline>Well, well, well...<pause><pause> <var>nameVar</var>, it seems we’re going to be great friends! <pause><pause>Although, for our friendship to last, I do believe I’ll need some way of referring to you that isn’t ‘you’ or ‘<var>nameVar</var>’. <pause><pause>Most humans adopt certain pron- <pause><pause>wait, you <italics>are</italics> human, correct?",
             "retainPreviousText": true,
             "actions": [
                 "setvar speciesVar \"human\" ",
