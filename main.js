@@ -1,14 +1,23 @@
 async function main() {
+    // turn off for release
+    const PLAYTESTING = true;
+
     console.log("Started game!");
 
-    const displayedText = document.getElementById("displayedText");
+    const displayedText = document.getElementById("displayedText").children[0];
     const displayedImage = document.getElementById("displayedImage");
     const characterInfo = document.getElementById("characterInfo");
     const popup = document.getElementById("popup");
     const popupText = document.getElementById("popupText");
     const popupInput = document.getElementById("popupInput");
     const popupSubmit = document.getElementById("popupSubmit");
+    const skipTextDisplay = document.getElementById("skipTextDisplay");
     const mainContent = document.getElementById("mainContent");
+
+    if (!PLAYTESTING) {
+        skipTextDisplay.style.display = "none";
+    }
+
     // Initialize choices
     const choices = [1, 2, 3, 4, 5, 6].map((c) => document.getElementById("choice" + c));
     for (let i in choices) {
@@ -79,18 +88,23 @@ async function main() {
 
         return new Promise(function(resolve) {
             popupSubmit.onclick = function(e) {
-                popupText.innerText = "";
-                popup.style.display = "none";
-                document.documentElement.style.backgroundColor = "#FFF";
-                mainContent.style.pointerEvents = "auto";
+                if (popupInput.value !== "") {
+                    popupText.innerText = "";
+                    popup.style.display = "none";
+                    document.documentElement.style.backgroundColor = "#FFF";
+                    mainContent.style.pointerEvents = "auto";
 
-                resolve(popupInput.value);
+                    resolve(popupInput.value);
+                }
             };
         });
     };
 
-    let sleep = function(time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
+    let sleep = function(time, abortToken = { abort: function() {} }) {
+        return new Promise(function(resolve) {
+            setTimeout(resolve, time);
+            abortToken.abort = resolve;
+        });
     };
 
     const globalVars = new Map();
@@ -104,6 +118,15 @@ async function main() {
         const VAR_START = "<var>";
         const VAR_END = "</var>";
 
+        let abortToken = { abort: function() {} };
+
+        skipTextDisplay.disabled = false;
+        let onClickHandler = function(e) {
+            noSleep = true;
+            abortToken.abort();
+        };
+        skipTextDisplay.addEventListener("click", onClickHandler);
+
         const waitTime = Math.floor(36 - (displayedTextValue.length / 72));
 
         let summedValue = retainPrevious ? displayedText.innerHTML : "";
@@ -115,7 +138,7 @@ async function main() {
         for (let i = 0; i < displayedTextValue.length; i ++) {
             if (displayedTextValue.slice(i).startsWith(PAUSE)) {
                 // A pause.
-                if (!noSleep) await sleep(waitTime * 13);
+                if (!noSleep) await sleep(waitTime * 13, abortToken);
                 i += PAUSE.length - 1;
                 continue;
             }
@@ -123,7 +146,7 @@ async function main() {
             if (displayedTextValue.slice(i).startsWith(NEWLINE)) {
                 summedValue += "<br>";
                 displayedText.innerHTML = summedValue;
-                if (!noSleep) await sleep(waitTime);
+                if (!noSleep) await sleep(waitTime, abortToken);
                 i += NEWLINE.length - 1;
                 continue;
             }
@@ -170,6 +193,8 @@ async function main() {
                 if (displayedTextValue.slice(i).startsWith(VAR_END)) {
                     const variableValue = globalVars.get(variableBuffer);
                     if (variableValue === undefined) {
+                        skipTextDisplay.disabled = true;
+                        skipTextDisplay.removeEventListener("click", onClickHandler);
                         throw new Error("Tried to lookup undefined variable " + variableBuffer + " in text");
                     }
 
@@ -190,7 +215,7 @@ async function main() {
                     for (let j = 0; j < variableValue.toString().length; j ++) {
                         summedValue += prefix + variableValue.toString()[j].replaceAll("<", "&lt;").replaceAll(">", "&gt;") + suffix;
                         displayedText.innerHTML = summedValue;
-                        if (!noSleep) await sleep(waitTime);
+                        if (!noSleep) await sleep(waitTime, abortToken);
                     }
                     gettingVariable = false;
                     i += VAR_END.length - 1;
@@ -216,8 +241,11 @@ async function main() {
 
             summedValue += prefix + displayedTextValue[i].replaceAll("<", "&lt;").replaceAll(">", "&gt;") + suffix;
             displayedText.innerHTML = summedValue;
-            if (!noSleep) await sleep(waitTime);
+            if (!noSleep) await sleep(waitTime, abortToken);
         }
+
+        skipTextDisplay.disabled = true;
+        skipTextDisplay.removeEventListener("click", onClickHandler);
     };
 
     let getScript = async function(script) {
