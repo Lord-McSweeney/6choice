@@ -192,7 +192,7 @@
                 "stay"
             ],
             "actions": [
-                "sleep: 1200",
+                "sleep 1200",
                 "goto Prologue.chooseStartingStatus"
             ],
             "choices": []
@@ -207,7 +207,7 @@
                 "stay"
             ],
             "actions": [
-                "sleep: 1200",
+                "sleep 1200",
                 "goto Prologue.chooseStartingStatus"
             ],
             "choices": []
