@@ -10,7 +10,7 @@ async function loadMain() {
     let logLoadingError = function() {
         loadingInfo.innerText = "Failed to load resource.";
     };
-    
+
     let loadResource = async function(loadFn) {
         try {
             await loadFn();
@@ -33,8 +33,8 @@ async function loadMain() {
             document.fonts.add(font);
         },
         async function() {
-            const scriptData = await (await fetch("assets/prologue.json")).json();
-            window.loadedScripts.set("prologue", scriptData);
+            const scriptData = await (await fetch("assets/title.json")).json();
+            window.loadedScripts.set("title", scriptData);
         }
     ];
 

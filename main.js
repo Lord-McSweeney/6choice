@@ -27,7 +27,7 @@ async function main() {
         ["37 / 7 / 45 / 15", "37 / 15 / 45 / 23", "45 / 7 / 53 / 15", "45 / 15 / 53 / 23", "53 / 10 / 61 / 20"], // 5 choices
         ["37 / 7 / 45 / 15", "37 / 15 / 45 / 23", "45 / 7 / 53 / 15", "45 / 15 / 53 / 23", "53 / 7 / 61 / 15", "53 / 15 / 61 / 23"], // 6 choices
     ];
-    
+
     const fontSizes = [
         "",
         "2vw",
@@ -274,7 +274,9 @@ async function main() {
         let currentSceneIndex = findSceneIndexByName(entryPoint);
         let exited = false;
 
-        let runAction = async function(action, resolveFn) {
+        let runAction = async function(actions, index, resolveFn) {
+            const action = actions[index];
+
             let getValue = async function(operands, offset) {
                 const data = operands.split(" ")[offset];
                 const multiSpaceData = operands.split(" ").slice(offset).join(" ");
@@ -294,13 +296,13 @@ async function main() {
 
                     return (Math.random() * (upperBound - lowerBound)) + lowerBound;
                 } else if (!isNaN(parseInt(data))) {
-                    return parseInt(operands);
+                    return parseInt(data);
                 } else if (data.startsWith("$")) {
-                    const val = globalVars.get(operands.slice(1));
+                    const val = globalVars.get(data.slice(1));
                     if (val !== undefined) {
-                        return parseInt(operands);
+                        return val;
                     } else {
-                        throw new Error("Tried to access undefined variable " + operands);
+                        throw new Error("Tried to access undefined variable " + data);
                     }
                 } else if (multiSpaceData.startsWith('"') && multiSpaceData.endsWith('"')) {
                     return multiSpaceData.slice(1).slice(0, -1);
@@ -322,9 +324,92 @@ async function main() {
                     resolveFn({});
                     break;
 
-                case "endscene":
+                case "endscript":
                     exited = true;
                     resolveFn({});
+                    break;
+
+                case "ifeq":
+                    {
+                        let lookedAheadElse = null;
+                        let lookedAheadEndIf = null;
+                        let nestLevel = 1;
+                        for (let i = index + 1; i < actions.length; i ++) {
+                            const lookedOp = actions[i].split(" ")[0];
+                            if (nestLevel === 1) {
+                                if (lookedOp === "endif") {
+                                    if (lookedAheadEndIf === null) {
+                                        lookedAheadEndIf = i;
+                                        break;
+                                    }
+                                } else if (lookedOp === "else") {
+                                    if (lookedAheadElse === null) {
+                                        lookedAheadElse = i;
+                                    }
+                                }
+                            }
+
+                            if (lookedOp === "ifeq") {
+                                nestLevel += 1;
+                            } else if (lookedOp === "endif") {
+                                if (nestLevel === 0) {
+                                    throw new Error("Too many endifs for if-statements");
+                                }
+                                nestLevel -= 1;
+                            }
+                        }
+
+                        if (lookedAheadEndIf === null) {
+                            throw new Error("Could not find matching endif for if-statement");
+                        }
+
+                        const lhs = await getValue(operands, 0);
+                        const rhs = await getValue(operands, 1);
+                        if (lhs !== rhs) {
+                            if (lookedAheadElse !== null) {
+                                return lookedAheadElse + 1;
+                            } else {
+                                return lookedAheadEndIf;
+                            }
+                        }
+                        // If they are equal, proceed with normal execution.
+                    }
+                    break;
+
+                case "else":
+                    {
+                        let lookedAheadEndIf = null;
+                        let nestLevel = 1;
+                        for (let i = index + 1; i < actions.length; i ++) {
+                            const lookedOp = actions[i].split(" ")[0];
+                            if (nestLevel === 1) {
+                                if (lookedOp === "endif") {
+                                    if (lookedAheadEndIf === null) {
+                                        lookedAheadEndIf = i;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (lookedOp === "ifeq") {
+                                nestLevel += 1;
+                            } else if (lookedOp === "endif") {
+                                if (nestLevel === 0) {
+                                    throw new Error("Too many endifs for if-statements");
+                                }
+                                nestLevel -= 1;
+                            }
+                        }
+
+                        if (lookedAheadEndIf === null) {
+                            throw new Error("Could not find matching endif for if-statement");
+                        }
+
+                        return lookedAheadEndIf;
+                    }
+
+                case "endif":
+                    // no-op
                     break;
 
                 case "sleep":
@@ -349,19 +434,27 @@ async function main() {
                     }
                     break;
 
+                case "debug":
+                    console.log(operands);
+                    break;
+
                 default:
                     throw new Error("Unknown op " + op);
             }
+
+            return index + 1;
         };
 
         let runActions = async function(actions, resolveFn) {
+            let realActions = actions;
             if (typeof actions === "string") {
-                await runAction(actions.trim(), resolveFn);
-                return;
+                realActions = [actions];
             }
 
-            for (let i = 0; i < actions.length; i ++) {
-                await runAction(actions[i].trim(), resolveFn);
+            realActions = realActions.map((a) => a.trim());
+
+            for (let i = 0; i < realActions.length; ) {
+                i = await runAction(realActions, i, resolveFn);
             }
         };
 
@@ -440,6 +533,12 @@ async function main() {
 
     setDisplayedText("");
     setChoicesTo([]);
+
+    await runScript("title");
+
+    setDisplayedText("");
+    setChoicesTo([]);
+    await sleep(1000);
 
     await runScript("prologue");
 

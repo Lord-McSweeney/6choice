@@ -1,32 +1,14 @@
 {
-    "init": "Title",
+    "varsDeclared": [
+        "nameVar",
+        "speciesVar",
+        "titlePlay",
+        "subjPlay",
+        "objPlay",
+        "startingStatus"
+    ],
+    "init": "Prologue.narratorStart",
     "scenes": [
-        {
-            "name": "Title",
-            "immediateText": " ",
-            "choices": [{
-                "text": "PLAY",
-                "actions": "goto Prologue.narratorStart"
-            }, {
-                "text": "CREDITS",
-                "actions": "goto Prologue.credits"
-            }]
-        },
-        {
-            "name": "Prologue.credits",
-            "text": "Ah, hello there! <pause><pause>Curious about our Company, are you? <pause><pause>Well, let me give you a quick rundown.<newline><newline><pause><pause>We’re a cozy little operation with a slightly overworked but dedicated staff. <pause><pause>In the story department, it’s just me -<pause><pause> NARRATOR -<pause><pause> along with my esteemed colleagues, Narrator and narrator. <pause><pause>Of course, that is only the story department.",
-            "choices": [{
-                "text": "(continue)",
-                "actions": "continue"
-            }]
-        },
-        {
-            "text": "We’re not alone in this endeavor. <pause><pause>Behind the scenes, there’s a talented group of artists working tirelessly to bring all the backgrounds to life. <pause><pause><italics>You hear a soft chuckle and a faint ‘Pst!’ in the background.</italics> <pause><pause>But we’re just the humble staff; the real masterminds are our executives.<newline><newline><pause><pause>There’s the Chief Technology Officer, the savant genius who wrote all the code, uqers; <pause>the Chief Writing Officer, who drew all endings and penned every word, euriohh; <pause>and the Chief Executive Officer, the brilliant mind behind this project, Firey.",
-            "choices": [{
-                "text": "RETURN",
-                "actions": "goto Title"
-            }]
-        },
         {
             "name": "Prologue.narratorStart",
             "text": "Hello? <pause><pause>Hello.",
@@ -174,6 +156,12 @@
         {
             "name": "Prologue.isIndividual",
             "text": "Je n’en reviens pas! <pause><pause>You are one of <italics>those</italics>? <pause><pause>Oh, I mean no offense by it, of course. <pause><pause>It’s just been so long! <pause><pause>I am <bold>too</bold> happy.",
+            "actions": [
+                "setvar titlePlay \"individual\"",
+                "setvar subjPlay \"they\"",
+                "setvar objPlay \"them\"",
+                "stay"
+            ],
              "choices": [{
                 "text": "...",
                 "actions": "goto Prologue.chooseStartingStatus"
@@ -195,7 +183,7 @@
         },
         {
             "name": "Prologue.isGentleman",
-            "text": "Interesting! <pause><pause>You know, I like to consider myself something of a ‘gentleman,’ <pause>although I technically do not <italics>have<italics> a gender.",
+            "text": "Interesting! <pause><pause>You know, I like to consider myself something of a ‘gentleman,’ <pause>although I technically do not <italics>have</italics> a gender.",
             "actions": [
                 "setvar titlePlay \"gentleman\"",
                 "setvar subjPlay \"he\"",
@@ -285,7 +273,7 @@
             "name": "Prologue.boringInfo",
             "text": "I see, I see... <pause><pause>Schoolwork, a roof over your head, and a modest amount of comfort... <pause><pause>but perhaps also a touch of monotony? <pause><pause>It's a life where opportunities can be limited.<newline><newline>",
             "actions": [
-                "setvar startingStatus \"middle class\" ",
+                "setvar startingStatus \"middleclass\" ",
                 "sleep 1200",
                 "continue"
             ],
@@ -406,7 +394,7 @@
             "text": "Well, <var>nameVar</var>, it’s been lovely getting to know you. <pause><pause>Anything you would like to ask me before I send you back to where you were?",
             "choices": [{
                 "text": "Nope, let’s get started.",
-                "actions": "endscene"
+                "actions": "endscript"
             }, {
                 "text": "What’s the game about?",
                 "actions": "goto Prologue.aboutGame"
@@ -423,7 +411,7 @@
             "text": "Anything else you would like to ask me before I send you back to where you were?",
             "choices": [{
                 "text": "Nope, let’s get started.",
-                "actions": "endscene"
+                "actions": "endscript"
             }, {
                 "text": "What’s the game about?",
                 "actions": "goto Prologue.aboutGame"
@@ -433,20 +421,6 @@
             }, {
                 "text": "Do you really like your job?",
                 "actions": "goto Prologue.narratorLikesJob"
-            }]
-        },
-        {
-            "name": "Prologue.lovelyToKnowYouAgainDontAsk",
-            "text": "Anything else you would like to ask me before I send you back to where you were?",
-            "choices": [{
-                "text": "Nope, let’s get started.",
-                "actions": "endscene"
-            }, {
-                "text": "What’s the game about?",
-                "actions": "goto Prologue.aboutGame"
-            }, {
-                "text": "Are you French?",
-                "actions": "goto Prologue.narratorFrench"
             }]
         },
         {

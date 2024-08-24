@@ -1,9 +1,146 @@
 {
-    "init": "Awakening.wake",
+    "varsDeclared": ["nightmareLocation"],
+    "init": "Awakening.init",
     "scenes": [
         {
-            "name": "Awakening.wake",
-            "text": "The world around you seems to shift as the white void surrounding you dissolves into a blurred mess of shapes and colors.",
+            "name": "Awakening.init",
+            "text": "",
+            "actions": "goto Awakening.wakeUp"
+        },
+        {
+            "name": "Awakening.wakeUp",
+            "text": "The world around you seems to shift as the white void surrounding you dissolves into a blurred mess of shapes and colors.<pause><pause><pause><newline><newline>You rub your eyes tiredly. <pause><pause>\"...What was that voice?\"<pause><pause><pause><newline><newline>You look up, but the world remains fragmented. <pause><pause>Your vision swims with indistinct patches of light and shadow, refusing to come into clear view.",
+            "choices": [{
+                "text": "...",
+                "actions": [
+                    "ifeq $startingStatus \"slums\" ",
+                        "goto Awakening.startSlums",
+                    "endif",
+                    "ifeq $startingStatus \"middleclass\" ",
+                        "goto Awakening.startMiddleClass",
+                    "endif",
+                    "ifeq $startingStatus \"legacy\" ",
+                        "goto Awakening.startLegacy",
+                    "endif"
+                ]
+            }]
+        },
+        {
+            "name": "Awakening.startSlums",
+            "text": "You massage your head wearily, trying to shake off the lingering exhaustion. <pause><pause>Despite your efforts, the haze of sleep clings stubbornly to your mind. <pause><pause>As all attempts to stay awake falter, a sudden thought strikes you. <pause><pause><italics>Is... <pause>is this the Spell?</italics><newline><newline><pause><pause><pause>The realization jolts you awake, just enough to let you recall the protocols for such situations. <pause><pause>\"The- the third directive, right... <pause>the third directive. <pause><pause>Uhm. <pause>Go to the police station...<pause>?\"",
+            "choices": [{
+                "text": "Go to the police station",
+                "actions": "goto Awakening.slums.policeStationStart"
+            }, {
+                "text": "Find a secluded place in the slums",
+                "actions": "goto Awakening.slums.slumsStart"
+            }]
+        },
+        {
+            "name": "Awakening.slums.policeStationStart",
+            "text": "You slog through the sludge-coated streets, oblivious to the rancid stench as you struggle to keep your eyes open. <pause><pause>Finally, you find yourself in front of the closed doors of the police station, barely holding onto your last threads of alertness.",
+            "choices": [{
+                "text": "Enter the building",
+                "actions": "goto Awakening.enterPoliceStation"
+            }]
+        },
+        {
+            "name": "Awakening.slums.slumsStart",
+            "text": "You wade through the muck and grime of the slums, the towering structures casting long shadows over the filthy streets. <pause><pause>It doesn’t take long to find a secluded alleyway, tucked away from the dangers that lurk nearby. <pause><pause>This place will have to do.",
+            "choices": []
+        },
+        {
+            "name": "Awakening.startMiddleClass",
+            "text": "A blurred face swims into view as you slowly emerge from your dazed state. <pause><pause>At first, the features are indistinct and unrecognizable, but slowly, they begin to sharpen. <pause><pause>Long, black hair framing a familiar face, eyes shaped just like yours, though shadowed with heavy, dark circles that betray an immense worry. <pause><pause>It’s your mother, standing before you. <pause><pause>Somewhere, as if from a distance, you hear your name being called.",
+            "choices": [{
+                "text": "...",
+                "actions": "continue"
+            }]
+        },
+        {
+            "name": "Awakening.middleclass.nameCalled",
+            "text": "\"<var>nameVar</var>?\"<newline><newline><pause><pause><pause>\"<var>nameVar</var>.\"<newline><newline><pause><pause><pause>\"<var>nameVar</var>!!\"<newline><newline><pause><pause><pause>The urgency in her voice seems to bring you back to your senses.<newline><newline><pause><pause><pause>\"Are you okay?\"",
+            "choices": [{
+                "text": "\"I’m fine.\"",
+                "actions": "goto Awakening.middleclass.isFine"
+            }, {
+                "text": "\"...I’m not feeling too good.\"",
+                "actions": "goto Awakening.middleclass.notTooGood"
+            }]
+        },
+        {
+            "name": "Awakening.middleclass.isFine",
+            "text": "\"Are you sure? <pause><pause>You’re not sick, are you?\"<newline><newline><pause><pause>\"No... <pause>I’ve, uh, just been feeling really tired lately...\" <pause>you stifle a yawn.<newline><newline><pause><pause>\"Tired? <pause><pause>How long has this been going on?\"<pause> she asks worriedly.<newline><newline><pause><pause>\"A couple days now,\"<pause> you answer, rubbing your eyes.",
+            "choices": [{
+                "text": "...",
+                "actions": "continue"
+            }]
+        },
+        {
+            "text": "The worry on her face deepens, her eyes widening with a sudden realization.<newline><newline><pause><pause>\"Oh no, the Spell!\"<pause> she exclaims, voice tinged with urgent panic. <pause><pause>\"The third directive said to go to the police station, right? <pause><pause>Quick! <pause>We need to get to the metro!\"",
+            "choices": [{
+                "text": "Give in to the urge to sleep.",
+                "actions": "goto Awakening.middleclass.fallAsleep"
+            }, {
+                "text": "Try to follow her.",
+                "actions": "goto Awakening.middleclass.gotoPoliceStation"
+            }]
+        },
+        {
+            "name": "Awakening.middleclass.notTooGood",
+            "text": "\"Are you feeling sick?\"<pause> she asks anxiously.<newline><newline><pause><pause>\"I don’t know if I’m sick, but... <pause>I just heard a French voice talking to me in my head, asking a bunch of questions... <pause>Ugh...\"<newline><newline><pause><pause>\"You’re hearing voices?!\"<newline><newline><pause><pause>\"...Just one. <pause><pause>It only happened today, but something... feels wrong,\"<pause><pause> you say, stifling a yawn.<newline><newline><pause><pause>\"Well, maybe you should get some sleep. <pause><pause>You’ve been looking really tired lately.\"",
+            "choices": [{
+                "text": "...",
+                "actions": "continue"
+            }]
+        },
+        {
+            "text": "She pauses, then her eyes widen again, the realization hitting her.<newline><newline><pause><pause>\"The Spell! <pause><pause>Oh no, the Spell!\"<pause><pause> she cries out in alarm. <pause><pause>\"Quick, we have to go to the police station! <pause><pause>Hurry, we’re going to the metro, let’s go!\"",
+            "choices": [{
+                "text": "Give in to the urge to sleep.",
+                "actions": "goto Awakening.middleclass.fallAsleep"
+            }, {
+                "text": "Try to follow her.",
+                "actions": "goto Awakening.middleclass.gotoPoliceStation"
+            }]
+        },
+        {
+            "name": "Awakening.middleclass.fallAsleep",
+            "text": "\"Ah... <pause>Are you sure? <pause><pause>I’m... feeling really tired. <pause><pause>Do you mind if I just...\"<newline><newline><pause><pause><pause>Your head droops forward, and you rest it on the table, nestled in your arms. <newline><newline><pause><pause>Your mother reaches out, saying something, but her words fade into the background.<newline><newline><pause><pause>A familiar voice speaks softly, words ringing uncomfortably in your ears.<newline><newline><pause><pause>\"Just sleep. <pause><pause>It’ll be over soon. <pause><pause>That, at least, I can promise you.\"",
+            "actions": [
+                "setvar nightmareLocation \"apartment\" ",
+                "stay"
+            ],
+            "choices": [{
+                "text": "...",
+                "actions": "goto Awakening.intoNightmare"
+            }]
+        },
+        {
+            "name": "Awakening.middleclass.gotoPoliceStation",
+            "text": "You rush to the police station in panic. <pause><pause>Your mother tensely watches over each and every one of your moments to ensure you remain awake. <pause><pause>Somehow, you manage to make it to the doors of the police station conscious.",
+            "choices": [{
+                "text": "Enter the building",
+                "actions": "goto Awakening.enterPoliceStation"
+            }]
+        },
+        {
+            "name": "Awakening.startLegacy",
+            "text": "[WAITING ON WRITING: START AS LEGACY]",
+            "choices": []
+        },
+        {
+            "name": "Awakening.enterPoliceStation",
+            "text": "[WAITING ON WRITING: ENTER POLICE STATION]",
+            "actions": [
+                "setvar nightmareLocation \"policeStation\" ",
+                "stay"
+            ],
+            "choices": []
+        },
+        {
+            "name": "Awakening.intoNightmare",
+            "text": "[WAITING ON WRITING: START NIGHTMARE]",
             "choices": []
         }
     ]
