@@ -120,7 +120,7 @@
         },
         {
             "name": "Prologue.isHuman",
-            "text": "<newline><newline><var>nameVar</var>: Yes...? <newline>Ah, <italics>quel soulagement</italics>! <pause><pause>I was afraid I would’ve offended you.",
+            "text": "<newline><newline><var>nameVar</var>: Yes...? <newline><newline>Ah, <italics>quel soulagement</italics>! <pause><pause>I was afraid I would’ve offended you.",
             "retainPreviousText": true,
             "actions": [
                 "sleep 1200",
@@ -184,37 +184,38 @@
         },
         {
             "name": "Prologue.isLady",
-            "text": "<newline><newline><var>nameVar</var>: A lady <newline><newline>I see! <pause><pause>Very nice to meet you.",
-            "retainPreviousText": true,
+            "text": "I see! <pause><pause>Very nice to meet you.",
             "actions": [
                 "setvar titlePlay \"lady\"",
                 "setvar subjPlay \"she\"",
                 "setvar objPlay \"her\"",
                 "stay"
             ],
-            "choices": [{
-                "text": "...",
-                "actions": "goto Prologue.chooseStartingStatus"
-            }]
+            "actions": [
+                "sleep: 1200",
+                "goto Prologue.chooseStartingStatus"
+            ],
+            "choices": []
         },
         {
             "name": "Prologue.isGentleman",
-            "text": "<newline><newline><var>nameVar</var>: A gentleman <newline><newline> Interesting! <pause><pause>You know, I like to consider myself something of a ‘gentleman,’ <pause>although I technically do not <italics>have</italics> a gender.",
-            "retainPreviousText": true,
+            "text": "Interesting! <pause><pause>You know, I like to consider myself something of a ‘gentleman,’ <pause>although I technically do not <italics>have</italics> a gender.",
             "actions": [
                 "setvar titlePlay \"gentleman\"",
                 "setvar subjPlay \"he\"",
                 "setvar objPlay \"him\"",
                 "stay"
             ],
-            "choices": [{
-                "text": "...",
-                "actions": "goto Prologue.chooseStartingStatus"
-            }]
+            "actions": [
+                "sleep: 1200",
+                "goto Prologue.chooseStartingStatus"
+            ],
+            "choices": []
         },
         {
             "name": "Prologue.chooseStartingStatus",
             "text": "So, mon ami, where is your place of residence? <pause><pause>Maintaining connections like <italics>this</italics> (You get a vague idea that NARRATOR is waving ‘his’ hands around in a rather pitiful attempt to gesture at ‘his’ beautiful, mahogany desk) takes quite an effort. <pause><pause>Besides, I should visit you from time to time, as friends do.",
+            "retainPreviousText": true,
             "choices": [{
                 "text": "An abandoned warehouse in the slums.",
                 "actions": "goto Prologue.slumsInfo"
@@ -243,10 +244,11 @@
                 "The slums can be cruel, but they also breed those who are unyielding in the face of adversity."
             ],
             "retainPreviousText": true,
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "actions": [
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
         },
         {
             "text": "<newline><newline>I’m curious, <var>nameVar</var>. <pause><pause>How did <italics>you</italics> survive such a brutal environment?",
@@ -303,10 +305,11 @@
                 "Perhaps you found contentment in the stability it provided?"
             ],
             "retainPreviousText": true,
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "actions": [
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
         },
         {
             "text": "<newline><newline>But I wonder, how did the average life shape <italics>you</italics>, <var>nameVar</var>? <pause><pause>Were you the diligent sort, always striving to maintain the status quo? <pause><pause>Or did you harbor dreams of something greater, something that your station couldn’t satisfy?",
@@ -363,10 +366,11 @@
                 "It’s said that those born into wealth often find themselves trapped by it, their paths predetermined by the weight of their family name."
             ],
             "retainPreviousText": true,
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "actions": [
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
         },
         {
             "text": "<newline><newline>Tell me, <var>nameVar</var>, how did you handle the life of a Legacy? <pause><pause>Were you proud of your heritage, eager to embrace your family name? <pause><pause>Or did you long to break free from the constraints of your lineage and forge your own path?",
