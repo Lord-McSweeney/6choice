@@ -185,7 +185,7 @@
         {
             "name": "Prologue.isLady",
             "text": "<newline><newline><var>nameVar</var>: A lady <newline><newline>I see! <pause><pause>Very nice to meet you.",
-            "retainPreviousText"true,
+            "retainPreviousText": true,
             "actions": [
                 "setvar titlePlay \"lady\"",
                 "setvar subjPlay \"she\"",
