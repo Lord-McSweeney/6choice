@@ -108,14 +108,16 @@
         {
             "name": "Prologue.isHuman",
             "text": "Ah, <italics>quel soulagement</italics>! <pause><pause>I was afraid I would’ve offended you.",
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "actions": [
+                "sleep 800",
+                "continue"
+            ],
+            "choices": []
         },
         {
             "name": "Prologue.askGender",
-            "text": "Now, if I may ask, are you a lady or a gentleman?",
+            "text": "<newline><newline>Now, if I may ask, are you a lady or a gentleman?",
+            "retainPreviousText": true,
             "choices": [{
                 "text": "[Maintain an awkward silence]",
                 "actions": "goto Prologue.isAwkward"
@@ -271,7 +273,7 @@
         },
         {
             "name": "Prologue.boringInfo",
-            "text": "I see, I see... <pause><pause>Schoolwork, a roof over your head, and a modest amount of comfort... <pause><pause>but perhaps also a touch of monotony? <pause><pause>It's a life where opportunities can be limited.<newline><newline>",
+            "text": "I see, I see... <pause><pause>Daily studies, a roof over your head, and a modest amount of comfort... <pause><pause>but perhaps also a touch of monotony? <pause><pause>It's a life where opportunities can be limited.<newline><newline>",
             "actions": [
                 "setvar startingStatus \"middleclass\" ",
                 "sleep 1200",
@@ -394,7 +396,7 @@
             "text": "Well, <var>nameVar</var>, it’s been lovely getting to know you. <pause><pause>Anything you would like to ask me before I send you back to where you were?",
             "choices": [{
                 "text": "Nope, let’s get started.",
-                "actions": "endscript"
+                "actions": "gotoscript 1200 awakening"
             }, {
                 "text": "What’s the game about?",
                 "actions": "goto Prologue.aboutGame"
@@ -411,7 +413,7 @@
             "text": "Anything else you would like to ask me before I send you back to where you were?",
             "choices": [{
                 "text": "Nope, let’s get started.",
-                "actions": "endscript"
+                "actions": "gotoscript 1200 awakening"
             }, {
                 "text": "What’s the game about?",
                 "actions": "goto Prologue.aboutGame"

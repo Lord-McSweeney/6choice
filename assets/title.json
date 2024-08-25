@@ -7,10 +7,13 @@
             "immediateText": " ",
             "choices": [{
                 "text": "PLAY",
-                "actions": "endscript"
+                "actions": "gotoscript 850 prologue"
             }, {
                 "text": "CREDITS",
                 "actions": "goto Prologue.credits"
+            }, {
+                "text": "LOAD GAME",
+                "actions": "loadgame"
             }]
         },
         {
