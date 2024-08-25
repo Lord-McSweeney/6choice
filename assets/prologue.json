@@ -457,7 +457,7 @@
             "name": "Prologue.narratorFrench",
             "text": "Actually, 事​​实​​上​​，​​我​​是​​中​​国​​人。<pause><pause>我​​一​​直​​用​​法​​语​​跟​​你​​说​​话​​就​​是​​为​​了​​看​​看​​你​​是​​不​​是​​会​​问​​我​​这​​个​​问​​题​​。​<pause><pause>Haha, just kidding! To <bold>you</bold>, I’m just a system, so how can I be of any human nationality?",
             "choices": [{
-                "text": "...",
+                "text": "[return]",
                 "actions": "goto Prologue.lovelyToKnowYouAgain"
             }]
         },
