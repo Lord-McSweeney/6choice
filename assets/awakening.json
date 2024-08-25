@@ -106,7 +106,7 @@
         },
         {
             "name": "Awakening.middleclass.fallAsleep",
-            "text": "\"Ah... <pause>Are you sure? <pause><pause>I’m... feeling really tired. <pause><pause>Do you mind if I just...\"<newline><newline><pause><pause><pause>Your head droops forward, and you rest it on the table, nestled in your arms. <newline><newline><pause><pause>Your mother reaches out, saying something, but her words fade into the background.<newline><newline><pause><pause>A familiar voice speaks softly, words ringing uncomfortably in your ears.<newline><newline><pause><pause>\"Just sleep. <pause><pause>It’ll be over soon. <pause><pause>That, at least, I can promise you.\"",
+            "text": "\"Ah... <pause>Are you sure? <pause><pause>I’m... feeling really tired. <pause><pause>Do you mind if I just...\"<newline><newline><pause><pause><pause>Your head droops forward, and you rest it on the table, nestled in your arms. <newline><newline><pause><pause>Your mother reaches out, saying something, but her words fade into the background.<newline><newline><pause><pause>A familiar voice speaks softly, words ringing uncomfortably in your ears.<newline><newline><pause><pause><italics>Just sleep. <pause><pause>It’ll be over soon. <pause><pause>That, at least, I can promise you.</italics>",
             "actions": [
                 "setvar nightmareLocation \"apartment\" ",
                 "stay"
