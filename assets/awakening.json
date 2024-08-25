@@ -11,7 +11,7 @@
             "name": "Awakening.wakeUp",
             "text": "The world around you seems to shift as the white void surrounding you dissolves into a blurred mess of shapes and colors.<pause><pause><pause><newline><newline>You rub your eyes tiredly. <pause><pause>\"...What was that voice?\"<pause><pause><pause><newline><newline>You look up, but the world remains fragmented. <pause><pause>Your vision swims with indistinct patches of light and shadow, refusing to come into clear view.",
             "choices": [{
-                "text": "...",
+                "text": "Pull yourself together",
                 "actions": [
                     "ifeq $startingStatus \"slums\" ",
                         "goto Awakening.startSlums",
@@ -53,7 +53,7 @@
             "name": "Awakening.startMiddleClass",
             "text": "A blurred face swims into view as you slowly emerge from your dazed state. <pause><pause>At first, the features are indistinct and unrecognizable, but slowly, they begin to sharpen. <pause><pause>Long, black hair framing a familiar face, eyes shaped just like yours, though shadowed with heavy, dark circles that betray an immense worry. <pause><pause>It’s your mother, standing before you. <pause><pause>Somewhere, as if from a distance, you hear your name being called.",
             "choices": [{
-                "text": "...",
+                "text": "[Continue]",
                 "actions": "continue"
             }]
         },
@@ -72,7 +72,7 @@
             "name": "Awakening.middleclass.isFine",
             "text": "\"Are you sure? <pause><pause>You’re not sick, are you?\"<newline><newline><pause><pause>\"No... <pause>I’ve, uh, just been feeling really tired lately...\" <pause>you stifle a yawn.<newline><newline><pause><pause>\"Tired? <pause><pause>How long has this been going on?\"<pause> she asks worriedly.<newline><newline><pause><pause>\"A couple days now,\"<pause> you answer, rubbing your eyes.",
             "choices": [{
-                "text": "...",
+                "text": "[Continue]",
                 "actions": "continue"
             }]
         },
@@ -90,7 +90,7 @@
             "name": "Awakening.middleclass.notTooGood",
             "text": "\"Are you feeling sick?\"<pause> she asks anxiously.<newline><newline><pause><pause>\"I don’t know if I’m sick, but... <pause>I just heard a French voice talking to me in my head, asking a bunch of questions... <pause>Ugh...\"<newline><newline><pause><pause>\"You’re hearing voices?!\"<newline><newline><pause><pause>\"...Just one. <pause><pause>It only happened today, but something... feels wrong,\"<pause><pause> you say, stifling a yawn.<newline><newline><pause><pause>\"Well, maybe you should get some sleep. <pause><pause>You’ve been looking really tired lately.\"",
             "choices": [{
-                "text": "...",
+                "text": "[Continue]",
                 "actions": "continue"
             }]
         },
@@ -112,7 +112,7 @@
                 "stay"
             ],
             "choices": [{
-                "text": "...",
+                "text": "[Continue]",
                 "actions": "goto Awakening.intoNightmare"
             }]
         },
