@@ -214,7 +214,7 @@
         },
         {
             "name": "Prologue.chooseStartingStatus",
-            "text": "So, mon ami, where is your place of residence? <pause><pause>Maintaining connections like <italics>this</italics> (You get a vague idea that NARRATOR is waving ‘his’ hands around in a rather pitiful attempt to gesture at ‘his’ beautiful, mahogany desk) takes quite an effort. <pause><pause>Besides, I should visit you from time to time, as friends do.",
+            "text": "<newline><newline>So, mon ami, where is your place of residence? <pause><pause>Maintaining connections like <italics>this</italics> (You get a vague idea that NARRATOR is waving ‘his’ hands around in a rather pitiful attempt to gesture at ‘his’ beautiful, mahogany desk) takes quite an effort.",
             "retainPreviousText": true,
             "choices": [{
                 "text": "An abandoned warehouse in the slums.",
