@@ -13,7 +13,10 @@
                 "actions": "goto Prologue.credits"
             }, {
                 "text": "LOAD GAME",
-                "actions": "loadgame"
+                "actions": [
+                    "loadgame",
+                    "stay"
+                ]
             }]
         },
         {

@@ -81,7 +81,7 @@ async function main() {
         displayPrintedText(displayedTextValue, false, true);
     };
 
-    let openTextPopup = function(text, fontSize="20px", height="8vh") {
+    let openTextPopup = function(text, allowEmpty, fontSize="20px", height="8vh") {
         popupInput.value = "";
         popupText.innerText = text;
         popupSubmit.innerText = "Submit";
@@ -97,7 +97,7 @@ async function main() {
 
         return new Promise(function(resolve) {
             popupSubmit.onclick = function(e) {
-                if (popupInput.value !== "") {
+                if (popupInput.value !== "" || allowEmpty) {
                     popupText.innerText = "";
                     popup.style.display = "none";
                     popupInput.style.display = "none";
@@ -327,7 +327,7 @@ async function main() {
 
     saveGame.onclick = async function(e) {
         const saveObj = serializedGame();
-        const saveName = await openTextPopup("Save this game under the save name of:", "0.85vw");
+        const saveName = await openTextPopup("Save this game under the save name of:", false, "0.85vw");
 
         if (window.localStorage.choice7Saves === undefined) {
             window.localStorage.choice7Saves = "{}";
@@ -339,7 +339,7 @@ async function main() {
             if (previousSaveWasEarlier) {
                 deserialized[saveName] = saveObj;
             } else {
-                const confirmation = await openTextPopup("Your current game is at an earlier in-game position than the save that you are attempting to overwrite. Type \"Yes\" and click the Submit button to proceed. Type anything else to cancel the save.", "0.7vw", "12.5vh");
+                const confirmation = await openTextPopup("Your current game is at an earlier in-game position than the save that you are attempting to overwrite. Type \"Yes\" and click the Submit button to proceed. Type anything else to cancel the save.", true, "0.7vw", "12.5vh");
                 if (confirmation !== "Yes") {
                     await openTextOnlyPopup("Save cancelled.");
                     return;
@@ -410,7 +410,7 @@ async function main() {
 
                 if (data === "%input") {
                     const printedText = operands.split(" ").slice(offset + 1).join(" ");
-                    return await openTextPopup(printedText);
+                    return await openTextPopup(printedText, false);
                 } else if (data === "%random") {
                     const lowerBound = parseInt(operands.split(" ")[offset + 1]);
                     const upperBound = parseInt(operands.split(" ")[offset + 2]);
@@ -581,14 +581,13 @@ async function main() {
 
                 case "loadgame":
                     let saveData = null;
-                    while (saveData === null) {
-                        const fileName = await openTextPopup("Save name of the save you want to load:", "0.85vw");
-                        const saves = JSON.parse(window.localStorage.choice7Saves);
-                        if (saves.hasOwnProperty(fileName)) {
-                            saveData = saves[fileName];
-                        } else {
-                            await openTextOnlyPopup("Save \"" + fileName + "\" not found.");
-                        }
+                    const fileName = await openTextPopup("Save name of the save you want to load:", true, "0.85vw");
+                    const saves = JSON.parse(window.localStorage.choice7Saves);
+                    if (saves.hasOwnProperty(fileName)) {
+                        saveData = saves[fileName];
+                    } else {
+                        await openTextOnlyPopup("Save \"" + fileName + "\" not found.");
+                        break;
                     }
 
                     globalVars = new Map(Object.entries(saveData.globalVars));
