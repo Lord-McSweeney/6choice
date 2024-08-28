@@ -166,3 +166,30 @@
 #skipTextDisplay:hover:disabled {
     background-color: #FFF;
 }
+
+#saveGame {
+    position: absolute;
+    bottom: 5px;
+    right: 6px;
+
+    background-color: #FFF;
+    border: 1px solid #222;
+    color: #111;
+    cursor: pointer;
+
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 5px;
+
+    /* Not specifying this explicitly results in default font */
+    font-family: "Choice7Font";
+}
+#saveGame:hover {
+    background-color: #DDD;
+}
+
+.darkened {
+    background-color: #BBB !important;
+}

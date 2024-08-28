@@ -57,7 +57,7 @@
         },
         {
             "name": "Prologue.narratorImportant",
-            "text": "<newline><newline>Player: \"Yes, it is.\" <newline><newline>Oh! <pause>A curious one, I see. <pause>But who I am isn’t important.",
+            "text": "<newline><newline>\"Yes, it is,\" you ask with interest. <newline><newline>Oh! <pause>A curious one, I see. <pause>But who I am isn’t important.",
             "retainPreviousText": true,
             "actions": [
                 "sleep 1200",
@@ -67,7 +67,7 @@
         },
         {
             "name": "Prologue.narratorNotImportant",
-            "text": "<newline><newline>Player: \"No, it's not.\" <newline><newline>Merveilleux! <pause><pause>Keep that up. <pause><pause>Anyways...",
+            "text": "<newline><newline> \"No, it's not,\"you reply. <newline><newline>Merveilleux! <pause><pause>Keep that up. <pause><pause>Anyways...",
             "retainPreviousText": true,
             "actions": [
                 "sleep 1200",
@@ -119,12 +119,12 @@
             "choices": []
         },
         {
-            "name": "Prologue.isHuman",
-            "text": "<newline><newline><var>nameVar</var>: Yes...? <newline><newline>Ah, <italics>quel soulagement</italics>! <pause><pause>I was afraid I would’ve offended you.",
-            "retainPreviousText": true,
-            "actions": [
-                "sleep 1200",
-                "goto Prologue.askGender"
+          "name": "Prologue.isHuman",
+          "text": "<newline><newline>Yes...? you say, staring confusedly at your screen. <newline><newline>Ah, <italics>quel soulagement</italics>! <pause><pause>I was afraid I would've affended you."
+          "retainPreviousText": true,
+          "actions": [
+                "sleep 800",
+                 "goto Prologue.askGender"
             ],
             "choices": []
         },
@@ -170,7 +170,7 @@
         },
         {
             "name": "Prologue.isIndividual",
-            "text": "<var>nameVar</var>: We live in a world where Nightmare Gates unleash horrors beyond comprehension and Awakened walk amongst us. Such mundane distinctions seem rather trivial, do they not? What value has ‘gender’ when the very fabric of our reality is frayed and torn? Perhaps it’s best we concerned ourselves with more pressing matters. <newline><newline> Je n’en reviens pas! <pause><pause>You are one of <italics>those</italics>? <pause><pause>Oh, I mean no offense by it, of course. <pause><pause>It’s just been so long! <pause><pause>I am <bold>too</bold> happy.",
+            "text": "You take a deep breathe and reply, \"We live in a world where Nightmare Gates unleash horrors beyond comprehension and Awakened walk amongst us. Such mundane distinctions seem rather trivial, do they not? What value has ‘gender’ when the very fabric of our reality is frayed and torn? Perhaps it’s best we concerned ourselves with more pressing matters.\" <newline><newline> Je n’en reviens pas! <pause><pause>You are one of <italics>those</italics>? <pause><pause>Oh, I mean no offense by it, of course. <pause><pause>It’s just been so long! <pause><pause>I am <bold>too</bold> happy.",
             "actions": [
                 "setvar titlePlay \"individual\"",
                 "setvar subjPlay \"they\"",
@@ -290,7 +290,7 @@
         },
         {
             "name": "Prologue.boringInfo",
-            "text": "I see, I see... <pause><pause>Schoolwork, a roof over your head, and a modest amount of comfort... <pause><pause>but perhaps also a touch of monotony? <pause><pause>It's a life where opportunities can be limited.<newline><newline>",
+            "text": "I see, I see... <pause><pause>Daily studies, a roof over your head, and a modest amount of comfort... <pause><pause>but perhaps also a touch of monotony? <pause><pause>It's a life where opportunities can be limited.<newline><newline>",
             "actions": [
                 "setvar startingStatus \"middleclass\" ",
                 "sleep 1200",
@@ -416,7 +416,7 @@
             "retainPreviousText": true,
             "choices": [{
                 "text": "Nope, let’s get started.",
-                "actions": "endscript"
+                "actions": "gotoscript 1200 awakening"
             }, {
                 "text": "What’s the game about?",
                 "actions": "goto Prologue.aboutGame"
@@ -433,7 +433,7 @@
             "text": "Anything else you would like to ask me before I send you back to where you were?",
             "choices": [{
                 "text": "Nope, let’s get started.",
-                "actions": "endscript"
+                "actions": "gotoscript 1200 awakening"
             }, {
                 "text": "What’s the game about?",
                 "actions": "goto Prologue.aboutGame"

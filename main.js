@@ -12,6 +12,7 @@ async function main() {
     const popupInput = document.getElementById("popupInput");
     const popupSubmit = document.getElementById("popupSubmit");
     const skipTextDisplay = document.getElementById("skipTextDisplay");
+    const saveGame = document.getElementById("saveGame");
     const mainContent = document.getElementById("mainContent");
 
     if (!PLAYTESTING) {
@@ -80,22 +81,60 @@ async function main() {
         displayPrintedText(displayedTextValue, false, true);
     };
 
-    let openTextPopup = function(text) {
+    let openTextPopup = function(text, allowEmpty, fontSize="20px", height="8vh") {
+        popupInput.value = "";
         popupText.innerText = text;
+        popupSubmit.innerText = "Submit";
+        popupText.style.fontSize = fontSize;
+        popupInput.style.display = "block";
         popup.style.display = "block";
-        document.documentElement.style.backgroundColor = "#BBB";
+        popup.style.height = height;
+        popupInput.style.display = "inline";
+        document.documentElement.classList.add("darkened");
+        saveGame.classList.add("darkened");
+        skipTextDisplay.classList.add("darkened");
         mainContent.style.pointerEvents = "none";
 
         return new Promise(function(resolve) {
             popupSubmit.onclick = function(e) {
-                if (popupInput.value !== "") {
+                if (popupInput.value !== "" || allowEmpty) {
                     popupText.innerText = "";
                     popup.style.display = "none";
-                    document.documentElement.style.backgroundColor = "#FFF";
+                    popupInput.style.display = "none";
+                    document.documentElement.classList.remove("darkened");
+                    saveGame.classList.remove("darkened");
+                    skipTextDisplay.classList.remove("darkened");
                     mainContent.style.pointerEvents = "auto";
 
                     resolve(popupInput.value);
                 }
+            };
+        });
+    };
+
+    let openTextOnlyPopup = function(text, fontSize="20px", height="8vh") {
+        popupText.innerText = text;
+        popupSubmit.innerText = "Okay";
+        popupText.style.fontSize = fontSize;
+        popupInput.style.display = "none";
+        popup.style.display = "block";
+        popup.style.height = height;
+        popupInput.style.display = "none";
+        document.documentElement.classList.add("darkened");
+        saveGame.classList.add("darkened");
+        skipTextDisplay.classList.add("darkened");
+        mainContent.style.pointerEvents = "none";
+
+        return new Promise(function(resolve) {
+            popupSubmit.onclick = function(e) {
+                popupText.innerText = "";
+                popup.style.display = "none";
+                document.documentElement.classList.remove("darkened");
+                saveGame.classList.remove("darkened");
+                skipTextDisplay.classList.remove("darkened");
+                mainContent.style.pointerEvents = "auto";
+
+                resolve();
             };
         });
     };
@@ -107,7 +146,7 @@ async function main() {
         });
     };
 
-    const globalVars = new Map();
+    let globalVars = new Map();
     let displayPrintedText = async function(displayedTextValue, retainPrevious=false, noSleep=false) {
         const PAUSE = "<pause>";
         const NEWLINE = "<newline>";
@@ -258,7 +297,64 @@ async function main() {
         }
     };
 
-    let runScript = async function(script) {
+    let currentSceneIndex = 0;
+    let currentScript = null;
+
+    // Returns true if the first two arguments represent a scene in a script coming before or the same as the second two arguments.
+    let orderCheck = function(scriptName1, sceneNumber1, scriptName2, sceneNumber2) {
+        const scriptNames = ["title", "prologue", "awakening"];
+        if (scriptNames.indexOf(scriptName1) === -1 || scriptNames.indexOf(scriptName2) === -1) {
+            throw new Error("Invalid script passed to orderCheck()");
+        }
+        if (scriptNames.indexOf(scriptName1) < scriptNames.indexOf(scriptName2)) {
+            return true;
+        }
+        if (scriptNames.indexOf(scriptName1) > scriptNames.indexOf(scriptName2)) {
+            return false;
+        }
+        return sceneNumber1 <= sceneNumber2;
+    };
+
+    let serializedGame = function() {
+        const obj = {
+            currentScript,
+            currentSceneIndex,
+            globalVars: Object.fromEntries(globalVars),
+        };
+
+        return obj;
+    };
+
+    saveGame.onclick = async function(e) {
+        const saveObj = serializedGame();
+        const saveName = await openTextPopup("Save this game under the save name of:", false, "0.85vw");
+
+        if (window.localStorage.choice7Saves === undefined) {
+            window.localStorage.choice7Saves = "{}";
+        }
+
+        const deserialized = JSON.parse(window.localStorage.choice7Saves);
+        if (deserialized.hasOwnProperty(saveName)) {
+            const previousSaveWasEarlier = orderCheck(deserialized[saveName].currentScript, deserialized[saveName].currentSceneIndex, saveObj.currentScript, saveObj.currentSceneIndex);
+            if (previousSaveWasEarlier) {
+                deserialized[saveName] = saveObj;
+            } else {
+                const confirmation = await openTextPopup("Your current game is at an earlier in-game position than the save that you are attempting to overwrite. Type \"Yes\" and click the Submit button to proceed. Type anything else to cancel the save.", true, "0.7vw", "12.5vh");
+                if (confirmation !== "Yes") {
+                    await openTextOnlyPopup("Save cancelled.");
+                    return;
+                }
+            }
+        } else {
+            deserialized[saveName] = saveObj;
+        }
+
+        window.localStorage.choice7Saves = JSON.stringify(deserialized);
+        await openTextOnlyPopup("Save successful! Remember your save name:\n\"" + saveName + "\"", "0.75vw");
+    };
+
+    let runScript = async function(script, startingSceneIndex) {
+        currentScript = script;
         const scriptData = await getScript(script);
 
         // Preprocess the script data
@@ -299,8 +395,11 @@ async function main() {
         const entryPoint = scriptData.init;
         const entryScene = findSceneByName(entryPoint);
 
-        let currentSceneIndex = findSceneIndexByName(entryPoint);
-        let exited = false;
+        if (startingSceneIndex === undefined) {
+            currentSceneIndex = findSceneIndexByName(entryPoint);
+        } else {
+            currentSceneIndex = startingSceneIndex;
+        }
 
         let runAction = async function(actions, index, resolveFn) {
             const action = actions[index];
@@ -311,7 +410,7 @@ async function main() {
 
                 if (data === "%input") {
                     const printedText = operands.split(" ").slice(offset + 1).join(" ");
-                    return await openTextPopup(printedText);
+                    return await openTextPopup(printedText, false);
                 } else if (data === "%random") {
                     const lowerBound = parseInt(operands.split(" ")[offset + 1]);
                     const upperBound = parseInt(operands.split(" ")[offset + 2]);
@@ -352,9 +451,23 @@ async function main() {
                     resolveFn({});
                     break;
 
-                case "endscript":
-                    exited = true;
-                    resolveFn({});
+                case "gotoscript":
+                    setDisplayedText("");
+                    setChoicesTo([]);
+
+                    const parsedF = parseInt(operands.split(" ")[0]);
+                    if (!isNaN(parsedF)) {
+                        if (parsedF < 10000) {
+                            await sleep(parsedF);
+                        } else {
+                            throw new Error("Refusing to sleep for more than 10 seconds");
+                        }
+                    } else {
+                        throw new Error("Bad sleep duration \"" + operands.split(" ")[0] + "\"");
+                    }
+
+                    await runScript(operands.split(" ")[1]);
+                    throw new Error("runScript should never exit!");
                     break;
 
                 case "ifeq":
@@ -449,7 +562,7 @@ async function main() {
                             throw new Error("Refusing to sleep for more than 10 seconds");
                         }
                     } else {
-                        throw new Error("Bad sleep duration \"" + operands[0] + "\"");
+                        throw new Error("Bad sleep duration \"" + operands + "\"");
                     }
                     break;
 
@@ -464,6 +577,23 @@ async function main() {
 
                 case "debug":
                     console.log(operands);
+                    break;
+
+                case "loadgame":
+                    let saveData = null;
+                    const fileName = await openTextPopup("Save name of the save you want to load:", true, "0.85vw");
+                    const saves = JSON.parse(window.localStorage.choice7Saves);
+                    if (saves.hasOwnProperty(fileName)) {
+                        saveData = saves[fileName];
+                    } else {
+                        await openTextOnlyPopup("Save \"" + fileName + "\" not found.");
+                        break;
+                    }
+
+                    globalVars = new Map(Object.entries(saveData.globalVars));
+
+                    await runScript(saveData.currentScript, saveData.currentSceneIndex);
+                    throw new Error("runScript should never exit!");
                     break;
 
                 default:
@@ -518,8 +648,10 @@ async function main() {
                     });
                 });
 
-                if (result.hasOwnProperty("goto") || exited) {
+                if (result.hasOwnProperty("goto")) {
                     return result;
+                }
+                if (result.hasOwnProperty("newScene")) {
                 }
             }
 
@@ -545,7 +677,7 @@ async function main() {
             });
         };
 
-        while (!exited) {
+        while (true) {
             let scene = scriptData.scenes[currentSceneIndex];
             let resultingInfo = await runScene(scene);
 
@@ -563,18 +695,7 @@ async function main() {
     setChoicesTo([]);
 
     await runScript("title");
-
-    setDisplayedText("");
-    setChoicesTo([]);
-    await sleep(1000);
-
-    await runScript("prologue");
-
-    setDisplayedText("");
-    setChoicesTo([]);
-    await sleep(1500);
-
-    await runScript("awakening");
+    throw new Error("runScript should never exit!");
 }
 
 window.addEventListener("resourceLoadComplete", function(e) {
