@@ -12,27 +12,33 @@
         {
             "name": "Prologue.narratorStart",
             "text": "Hello? <pause><pause>Hello.",
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "actions": [
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
         },
         {
-            "text": "One, two, three. <pause>Mic check!",
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "text": "<newline><newline>One, two, three. <pause>Mic check!",
+            "retainPreviousText": true,
+            "actions": [
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
         },
         {
-            "text": "Are you reading this?",
-            "choices": [{
-                "text": "...?",
-                "actions": "continue"
-            }]
+            "text": "<newline><newline>Are you reading this?",
+            "retainPreviousText": true,
+            "actions": [
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
         },
         {
-            "text": "Yes, yes, I’m talking about <bold>you</bold>, player.",
+            "text": "<newline><newline>Yes, yes, I’m talking about <bold>you</bold>, player.",
+            "retainPreviousText": true,
             "choices": [{
                 "text": "Who are you?",
                 "actions": "continue"
@@ -51,23 +57,28 @@
         },
         {
             "name": "Prologue.narratorImportant",
-            "text": "Oh! <pause>A curious one, I see. <pause>But who I am isn’t important.",
-            "choices": [{
-                "text": "...",
-                "actions": "goto Prologue.whoYou"
-            }]
+            "text": "<newline><newline>\"Yes, it is,\" you ask with interest. <newline><newline>Oh! <pause>A curious one, I see. <pause>But who I am isn’t important.",
+            "retainPreviousText": true,
+            "actions": [
+                "sleep 1200",
+                "goto Prologue.whoYou"
+            ],
+            "choices": []
         },
         {
             "name": "Prologue.narratorNotImportant",
-            "text": "Merveilleux! <pause><pause>Keep that up. <pause><pause>Anyways...",
-            "choices": [{
-                "text": "...",
-                "actions": "goto Prologue.whoYou"
-            }]
+            "text": "<newline><newline> \"No, it's not,\"you reply. <newline><newline>Merveilleux! <pause><pause>Keep that up. <pause><pause>Anyways...",
+            "retainPreviousText": true,
+            "actions": [
+                "sleep 1200",
+                "goto Prologue.whoYou"
+            ],
+            "choices": []
         },
         {
             "name": "Prologue.whoYou",
-            "text": "The more pressing question here is<pause>.<pause>.<pause>. <pause><pause>who are <italics>you</italics>?",
+            "text": "<newline><newline>The more pressing question here is<pause>.<pause>.<pause>. <pause><pause>who are <italics>you</italics>?",
+            "retainPreviousText": true,
             "actions": [
                 "sleep 300",
                 "setvar nameVar %input What is your name?",
@@ -83,14 +94,16 @@
                 "\"<var>nameVar</var>\", you say? <pause><pause>How... <pause>curious.",
                 "Hmm? <pause><pause>Your name is <var>nameVar</var>? <pause><pause>By any chance, would you know-<pause><pause> Ah, but you wouldn’t. <pause><pause>Nevermind!"
             ],
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "actions": [
+                "sleep 1200",
+                "goto Prologue.narratorIntroduce"
+            ],
+            "choices": []
         },
         {
             "name": "Prologue.narratorIntroduce",
-            "text": "Well, well, well...<pause><pause> <var>nameVar</var>, it seems we’re going to be great friends! <pause><pause>Although, for our friendship to last, I do believe I’ll need some way of referring to you that isn’t ‘you’ or ‘<var>nameVar</var>’. <pause><pause>Most humans adopt certain pron- <pause><pause>wait, you <italics>are</italics> human, correct?",
+            "text": "<newline><newline>Well, well, well...<pause><pause> <var>nameVar</var>, it seems we’re going to be great friends! <pause><pause>Although, for our friendship to last, I do believe I’ll need some way of referring to you that isn’t ‘you’ or ‘<var>nameVar</var>’. <pause><pause>Most humans adopt certain pron- <pause><pause>wait, you <italics>are</italics> human, correct?",
+            "retainPreviousText": true,
             "actions": [
                 "setvar speciesVar \"human\" ",
                 "stay"
@@ -106,11 +119,12 @@
             "choices": []
         },
         {
-            "name": "Prologue.isHuman",
-            "text": "Ah, <italics>quel soulagement</italics>! <pause><pause>I was afraid I would’ve offended you.",
-            "actions": [
+          "name": "Prologue.isHuman",
+          "text": "<newline><newline>Yes...? you say, staring confusedly at your screen. <newline><newline>Ah, <italics>quel soulagement</italics>! <pause><pause>I was afraid I would've affended you."
+          "retainPreviousText": true,
+          "actions": [
                 "sleep 800",
-                "continue"
+                 "goto Prologue.askGender"
             ],
             "choices": []
         },
@@ -147,8 +161,7 @@
             "name": "Prologue.isAwkward",
             "text": "Hmm? <pause><pause>Is something the matter?",
             "choices": [{
-                "text": "Yes. We live in a world where Nightmare Gates unleash horrors beyond comprehension and Awakened walk amongst us. Such mundane distinctions seem rather trivial, do they not? What value has ‘gender’ when the very fabric of our reality is frayed and torn? Perhaps it’s best we concerned ourselves with more pressing matters.",
-                "fontSize": "0.9vw",
+                "text": "Yes, There is a problem.",
                 "actions": "goto Prologue.isIndividual"
             }, {
                 "text": "...Nothing.",
@@ -157,7 +170,7 @@
         },
         {
             "name": "Prologue.isIndividual",
-            "text": "Je n’en reviens pas! <pause><pause>You are one of <italics>those</italics>? <pause><pause>Oh, I mean no offense by it, of course. <pause><pause>It’s just been so long! <pause><pause>I am <bold>too</bold> happy.",
+            "text": "You take a deep breathe and reply, \"We live in a world where Nightmare Gates unleash horrors beyond comprehension and Awakened walk amongst us. Such mundane distinctions seem rather trivial, do they not? What value has ‘gender’ when the very fabric of our reality is frayed and torn? Perhaps it’s best we concerned ourselves with more pressing matters.\" <newline><newline> Je n’en reviens pas! <pause><pause>You are one of <italics>those</italics>? <pause><pause>Oh, I mean no offense by it, of course. <pause><pause>It’s just been so long! <pause><pause>I am <bold>too</bold> happy.",
             "actions": [
                 "setvar titlePlay \"individual\"",
                 "setvar subjPlay \"they\"",
@@ -178,10 +191,11 @@
                 "setvar objPlay \"her\"",
                 "stay"
             ],
-            "choices": [{
-                "text": "...",
-                "actions": "goto Prologue.chooseStartingStatus"
-            }]
+            "actions": [
+                "sleep 1200",
+                "goto Prologue.chooseStartingStatus"
+            ],
+            "choices": []
         },
         {
             "name": "Prologue.isGentleman",
@@ -192,14 +206,16 @@
                 "setvar objPlay \"him\"",
                 "stay"
             ],
-            "choices": [{
-                "text": "...",
-                "actions": "goto Prologue.chooseStartingStatus"
-            }]
+            "actions": [
+                "sleep 1200",
+                "goto Prologue.chooseStartingStatus"
+            ],
+            "choices": []
         },
         {
             "name": "Prologue.chooseStartingStatus",
-            "text": "So, mon ami, where is your place of residence? <pause><pause>Maintaining connections like <italics>this</italics> (You get a vague idea that NARRATOR is waving ‘his’ hands around in a rather pitiful attempt to gesture at ‘his’ beautiful, mahogany desk) takes quite an effort. <pause><pause>Besides, I should visit you from time to time, as friends do.",
+            "text": "<newline><newline>So, mon ami, where is your place of residence? <pause><pause>Maintaining connections like <italics>this</italics> (You get a vague idea that NARRATOR is waving ‘his’ hands around in a rather pitiful attempt to gesture at ‘his’ beautiful, mahogany desk) takes quite an effort.",
+            "retainPreviousText": true,
             "choices": [{
                 "text": "An abandoned warehouse in the slums.",
                 "actions": "goto Prologue.slumsInfo"
@@ -228,10 +244,11 @@
                 "The slums can be cruel, but they also breed those who are unyielding in the face of adversity."
             ],
             "retainPreviousText": true,
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "actions": [
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
         },
         {
             "text": "<newline><newline>I’m curious, <var>nameVar</var>. <pause><pause>How did <italics>you</italics> survive such a brutal environment?",
@@ -288,10 +305,11 @@
                 "Perhaps you found contentment in the stability it provided?"
             ],
             "retainPreviousText": true,
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "actions": [
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
         },
         {
             "text": "<newline><newline>But I wonder, how did the average life shape <italics>you</italics>, <var>nameVar</var>? <pause><pause>Were you the diligent sort, always striving to maintain the status quo? <pause><pause>Or did you harbor dreams of something greater, something that your station couldn’t satisfy?",
@@ -348,10 +366,11 @@
                 "It’s said that those born into wealth often find themselves trapped by it, their paths predetermined by the weight of their family name."
             ],
             "retainPreviousText": true,
-            "choices": [{
-                "text": "...",
-                "actions": "continue"
-            }]
+            "actions": [
+                "sleep 1200",
+                "continue"
+            ],
+            "choices": []
         },
         {
             "text": "<newline><newline>Tell me, <var>nameVar</var>, how did you handle the life of a Legacy? <pause><pause>Were you proud of your heritage, eager to embrace your family name? <pause><pause>Or did you long to break free from the constraints of your lineage and forge your own path?",
@@ -393,7 +412,8 @@
         },
         {
             "name": "Prologue.lovelyToKnowYou",
-            "text": "Well, <var>nameVar</var>, it’s been lovely getting to know you. <pause><pause>Anything you would like to ask me before I send you back to where you were?",
+            "text": "<newline><newline>Well, <var>nameVar</var>, it’s been lovely getting to know you. <pause><pause>Anything you would like to ask me before I send you back to where you were?",
+            "retainPreviousText": true,
             "choices": [{
                 "text": "Nope, let’s get started.",
                 "actions": "gotoscript 1200 awakening"
@@ -437,7 +457,7 @@
             "name": "Prologue.narratorFrench",
             "text": "Actually, 事​​实​​上​​，​​我​​是​​中​​国​​人。<pause><pause>我​​一​​直​​用​​法​​语​​跟​​你​​说​​话​​就​​是​​为​​了​​看​​看​​你​​是​​不​​是​​会​​问​​我​​这​​个​​问​​题​​。​<pause><pause>Haha, just kidding! To <bold>you</bold>, I’m just a system, so how can I be of any human nationality?",
             "choices": [{
-                "text": "...",
+                "text": "[return]",
                 "actions": "goto Prologue.lovelyToKnowYouAgain"
             }]
         },
