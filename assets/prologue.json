@@ -430,7 +430,7 @@
         },
         {
             "name": "Prologue.lovelyToKnowYouAgain",
-            "text": "Anything else you would like to ask me before I send you back to where you were?",
+            "text": "Anything else you would like to ask me?",
             "choices": [{
                 "text": "Nope, let’s get started.",
                 "actions": "gotoscript 1200 awakening"
@@ -449,7 +449,7 @@
             "name": "Prologue.aboutGame",
             "text": "It’s a choose-your-own-adventure game that’s set in the Shadow Slave universe. <pause><pause>The main focus of this game is the Antartica arc, due to the CWO and CTO of the Company. <pause><pause>Apparently, the two got too frustrated with the workload, refusing to write and code multiple variations of a Second Nightmare. <pause><pause>Can’t blame them, though.",
             "choices": [{
-                "text": "...Okay.",
+                "text": "[Return]",
                 "actions": "goto Prologue.lovelyToKnowYouAgain"
             }]
         },
@@ -457,7 +457,7 @@
             "name": "Prologue.narratorFrench",
             "text": "Actually, 事​​实​​上​​，​​我​​是​​中​​国​​人。<pause><pause>我​​一​​直​​用​​法​​语​​跟​​你​​说​​话​​就​​是​​为​​了​​看​​看​​你​​是​​不​​是​​会​​问​​我​​这​​个​​问​​题​​。​<pause><pause>Haha, just kidding! To <bold>you</bold>, I’m just a system, so how can I be of any human nationality?",
             "choices": [{
-                "text": "[return]",
+                "text": "[Return]",
                 "actions": "goto Prologue.lovelyToKnowYouAgain"
             }]
         },
