@@ -120,7 +120,7 @@
         },
         {
           "name": "Prologue.isHuman",
-          "text": "<newline><newline>Yes...? you say, staring confusedly at your screen. <newline><newline>Ah, <italics>quel soulagement</italics>! <pause><pause>I was afraid I would've affended you."
+          "text": "<newline><newline>Yes...? you say, staring confusedly at your screen. <newline><newline>Ah, <italics>quel soulagement</italics>! <pause><pause>I was afraid I would've affended you.",
           "retainPreviousText": true,
           "actions": [
                 "sleep 800",
