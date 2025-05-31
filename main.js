@@ -1,6 +1,8 @@
 async function main() {
-    // turn off for release
-    const PLAYTESTING = true;
+    const PLAYTESTING = window.isPlaytesting;
+
+    const SCRIPT_NAMES = window.scriptNames;
+    const FIRST_SCRIPT = window.firstScript;
 
     console.log("Started game!");
 
@@ -302,14 +304,17 @@ async function main() {
 
     // Returns true if the first two arguments represent a scene in a script coming before or the same as the second two arguments.
     let orderCheck = function(scriptName1, sceneNumber1, scriptName2, sceneNumber2) {
-        const scriptNames = ["title", "prologue", "awakening"];
-        if (scriptNames.indexOf(scriptName1) === -1 || scriptNames.indexOf(scriptName2) === -1) {
-            throw new Error("Invalid script passed to orderCheck()");
-        }
-        if (scriptNames.indexOf(scriptName1) < scriptNames.indexOf(scriptName2)) {
+        if (SCRIPT_NAMES == null) {
             return true;
         }
-        if (scriptNames.indexOf(scriptName1) > scriptNames.indexOf(scriptName2)) {
+
+        if (SCRIPT_NAMES.indexOf(scriptName1) === -1 || SCRIPT_NAMES.indexOf(scriptName2) === -1) {
+            throw new Error("Invalid script passed to orderCheck()");
+        }
+        if (SCRIPT_NAMES.indexOf(scriptName1) < SCRIPT_NAMES.indexOf(scriptName2)) {
+            return true;
+        }
+        if (SCRIPT_NAMES.indexOf(scriptName1) > SCRIPT_NAMES.indexOf(scriptName2)) {
             return false;
         }
         return sceneNumber1 <= sceneNumber2;
@@ -694,7 +699,7 @@ async function main() {
     setDisplayedText("");
     setChoicesTo([]);
 
-    await runScript("title");
+    await runScript(FIRST_SCRIPT);
     throw new Error("runScript should never exit!");
 }
 

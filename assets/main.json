@@ -1,0 +1,5 @@
+{
+    "isPlaytesting": true,
+    "firstScript": "title",
+    "scriptNames": ["title", "prologue", "awakening"]
+}

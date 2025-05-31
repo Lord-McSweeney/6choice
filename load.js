@@ -3,6 +3,11 @@ async function loadMain() {
 
     window.loadedScripts = new Map();
 
+    // Temporary initialization until main.json is loaded
+    window.isPlaytesting = true;
+    window.firstScript = null;
+    window.scriptNames = null;
+
     const mainContent = document.getElementById("mainContent");
     const loadingContainer = document.getElementById("loadingContainer");
     const loadingInfo = document.getElementById("loadingInfo");
@@ -33,8 +38,13 @@ async function loadMain() {
             document.fonts.add(font);
         },
         async function() {
-            const scriptData = await (await fetch("assets/title.json")).json();
-            window.loadedScripts.set("title", scriptData);
+            const mainData = await (await fetch("assets/main.json")).json();
+            window.isPlaytesting = mainData.isPlaytesting;
+            window.firstScript = mainData.firstScript;
+            window.scriptNames = mainData.scriptNames;
+
+            const scriptData = await (await fetch("assets/" + window.firstScript + ".json")).json();
+            window.loadedScripts.set(window.firstScript, scriptData);
         }
     ];
 
