@@ -38,7 +38,7 @@ async function loadMain() {
             document.fonts.add(font);
         },
         async function() {
-            const mainData = await (await fetch("assets/main.json")).json();
+            const mainData = await (await fetch("assets/_start.json")).json();
             window.isPlaytesting = mainData.isPlaytesting;
             window.firstScript = mainData.firstScript;
             window.scriptNames = mainData.scriptNames;
