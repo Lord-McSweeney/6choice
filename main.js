@@ -1,8 +1,9 @@
-async function main() {
-    const PLAYTESTING = window.isPlaytesting;
+async function main(loadData) {
+    const loadedScripts = loadData.loadedScripts;
 
-    const SCRIPT_NAMES = window.scriptNames;
-    const FIRST_SCRIPT = window.firstScript;
+    const PLAYTESTING = loadData.isPlaytesting;
+    const SCRIPT_NAMES = loadData.scriptNames;
+    const FIRST_SCRIPT = loadData.firstScript;
 
     console.log("Started game!");
 
@@ -290,11 +291,11 @@ async function main() {
     };
 
     let getScript = async function(script) {
-        if (window.loadedScripts.has(script)) {
-            return window.loadedScripts.get(script);
+        if (loadedScripts.has(script)) {
+            return loadedScripts.get(script);
         } else {
             const scriptData = await (await fetch("assets/" + script + ".json")).json();
-            window.loadedScripts.set(script, scriptData);
+            loadedScripts.set(script, scriptData);
             return scriptData;
         }
     };
@@ -704,5 +705,5 @@ async function main() {
 }
 
 window.addEventListener("resourceLoadComplete", function(e) {
-    main();
+    main(e.detail);
 });

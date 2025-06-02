@@ -1,12 +1,12 @@
 async function loadMain() {
     console.log("Loading resources...");
 
-    window.loadedScripts = new Map();
+    let loadedScripts = new Map();
 
     // Temporary initialization until main.json is loaded
-    window.isPlaytesting = true;
-    window.firstScript = null;
-    window.scriptNames = null;
+    let isPlaytesting = true;
+    let firstScript = null;
+    let scriptNames = null;
 
     const mainContent = document.getElementById("mainContent");
     const loadingContainer = document.getElementById("loadingContainer");
@@ -39,12 +39,12 @@ async function loadMain() {
         },
         async function() {
             const mainData = await (await fetch("assets/_start.json")).json();
-            window.isPlaytesting = mainData.isPlaytesting;
-            window.firstScript = mainData.firstScript;
-            window.scriptNames = mainData.scriptNames;
+            isPlaytesting = mainData.isPlaytesting;
+            firstScript = mainData.firstScript;
+            scriptNames = mainData.scriptNames;
 
-            const scriptData = await (await fetch("assets/" + window.firstScript + ".json")).json();
-            window.loadedScripts.set(window.firstScript, scriptData);
+            const scriptData = await (await fetch("assets/" + firstScript + ".json")).json();
+            loadedScripts.set(firstScript, scriptData);
         }
     ];
 
@@ -66,7 +66,15 @@ async function loadMain() {
 
     mainContent.style.display = "block";
     loadingContainer.style.display = "none";
-    window.dispatchEvent(new Event("resourceLoadComplete"));
+    window.dispatchEvent(new CustomEvent("resourceLoadComplete", {
+        detail: {
+            loadedScripts,
+
+            isPlaytesting,
+            firstScript,
+            scriptNames,
+        }
+    }));
 }
 
 document.addEventListener("DOMContentLoaded", function(e) {
